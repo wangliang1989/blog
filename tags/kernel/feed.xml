@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kernel on Pacblog</title>
+    <link>http://wangliang.one/blog/tags/kernel/</link>
+    <description>Recent content in Kernel on Pacblog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 14 Nov 2015 15:34:05 +0800</lastBuildDate>
+    <atom:link href="http://wangliang.one/blog/tags/kernel/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Linux系统的kernel管理</title>
+      <link>http://wangliang.one/blog/archives/manage-kernel/</link>
+      <pubDate>Sat, 14 Nov 2015 15:34:05 +0800</pubDate>
+      
+      <guid>http://wangliang.one/blog/archives/manage-kernel/</guid>
+      <description>
+
+&lt;h1 id=&#34;什么是-kernel&#34;&gt;什么是 kernel&lt;/h1&gt;
+
+&lt;p&gt;准确地说，Linux 只是各发行版的核心(kernel)，而不是一个完整的操作系统。
+核心的作用是操作硬件。
+那么核心或者说 kernel 究竟是什么呢？
+其实，就是一个文件: /boot/vmlinuz-xxx (一部机器上可能有数个核心)。&lt;/p&gt;
+
+&lt;h1 id=&#34;查看机器上有哪些-kernel&#34;&gt;查看机器上有哪些 kernel&lt;/h1&gt;
+
+&lt;p&gt;.. code-block:: bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$uname -r
+3.10.0-229.20.1.el7.x86_64
+
+$rpm -qa | grep kernel | sort
+kernel-3.10.0-229.11.1.el7.x86_64
+kernel-3.10.0-229.14.1.el7.x86_64
+kernel-3.10.0-229.20.1.el7.x86_64
+kernel-devel-3.10.0-229.11.1.el7.x86_64
+kernel-devel-3.10.0-229.14.1.el7.x86_64
+kernel-devel-3.10.0-229.20.1.el7.x86_64
+kernel-headers-3.10.0-229.20.1.el7.x86_64
+kernel-tools-3.10.0-229.20.1.el7.x86_64
+kernel-tools-libs-3.10.0-229.20.1.el7.x86_64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一个命令是查看机器目前使用的核心。
+第二个命令是查看有哪些核心。
+除了kernel外、kernel-devel、kernel-headers 和 kernel-tools这些是用于开发或者一些特别的程序需要。
+不同的发行版，除了kernel外，其他的命名规则各有不同。
+这里有几个 kernel 版本：3.10.0-229.11.1、3.10.0-229.14.1 和 3.10.0-229.20.1。
+目前，正在使用的是3.10.0-229.20.1。&lt;/p&gt;
+
+&lt;h1 id=&#34;删除不必要的-kernel&#34;&gt;删除不必要的 kernel&lt;/h1&gt;
+
+&lt;p&gt;之前认为，kernel太多会影响开机速度。
+现在据更专业的人士介绍，搜索内核只在生成grub.cfg时进行，记录在了配置文件grub-mkconfig中，所以多余的内核不会影响开机速度。
+这与我的实际感受不同。
+无论怎样，用一个kernel，保留一个kernel，这确实足够了。
+另外，谨慎使用autoremove命令。有时，a依赖b。安装了a，进而b因为依赖安装上了，恰好b也是其他的东西需要的。
+有一天a被删除，b可能会被错误地删除。所以不要轻易使用autoremove。
+现在，删除最旧的kernel：3.10.0-229.11.1&lt;/p&gt;
+
+&lt;p&gt;.. code-block:: bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo yum remove kernel-3.10.0-229.11.1.el7.x86_64
+$sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;什么时候删除&#34;&gt;什么时候删除&lt;/h1&gt;
+
+&lt;p&gt;Linux 系统会经常更新 kernel。
+在 kernel 更新后，有了超过两个 kernel 就可以考虑删除不必要的 kernel 了。
+那么如何知道 kernel 更新了呢？
+每次开机时会显示 kernel，发现 kernel 增多后就可以看看是不是有超过两个kernel了。
+也可以在更新时注意命令行输出。
+另外，如果使用了 virtualbox，在 kernel 更新后，虚拟机必须重新编译核心后才能继续使用。
+这时，你就知道 kernel 肯定已经更新了。&lt;/p&gt;
+
+&lt;h1 id=&#34;脚本实现&#34;&gt;脚本实现&lt;/h1&gt;
+
+&lt;p&gt;我已经写好一个Perl脚本，你可以在这里下载:
+&lt;a href=&#34;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&#34;&gt;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&lt;/a&gt; 。
+注意，如果这个脚本导致不良后果，\ &lt;strong&gt;我不负责&lt;/strong&gt;\。&lt;/p&gt;
+
+&lt;h1 id=&#34;virtualbox的问题&#34;&gt;Virtualbox的问题&lt;/h1&gt;
+
+&lt;p&gt;安装devel即可使用：&lt;/p&gt;
+
+&lt;p&gt;.. code-block:: bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo yum install kernel-devel
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
