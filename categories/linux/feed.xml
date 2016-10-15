@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Pacblog</title>
-    <link>http://wangliang.one/blog/categories/linux/</link>
+    <link>http://blog.wangliang.one/categories/linux/</link>
     <description>Recent content in Linux on Pacblog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 14 Nov 2015 15:34:05 +0800</lastBuildDate>
-    <atom:link href="http://wangliang.one/blog/categories/linux/feed/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.wangliang.one/categories/linux/feed/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Linux系统的kernel管理</title>
-      <link>http://wangliang.one/blog/archives/manage-kernel/</link>
+      <link>http://blog.wangliang.one/archives/manage-kernel/</link>
       <pubDate>Sat, 14 Nov 2015 15:34:05 +0800</pubDate>
       
-      <guid>http://wangliang.one/blog/archives/manage-kernel/</guid>
+      <guid>http://blog.wangliang.one/archives/manage-kernel/</guid>
       <description>
 
 &lt;h1 id=&#34;什么是-kernel&#34;&gt;什么是 kernel&lt;/h1&gt;
@@ -95,10 +95,10 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
     
     <item>
       <title>PATH环境变量修改总结</title>
-      <link>http://wangliang.one/blog/archives/environment-PATH-variable/</link>
+      <link>http://blog.wangliang.one/archives/environment-PATH-variable/</link>
       <pubDate>Tue, 10 Nov 2015 21:33:43 +0800</pubDate>
       
-      <guid>http://wangliang.one/blog/archives/environment-PATH-variable/</guid>
+      <guid>http://blog.wangliang.one/archives/environment-PATH-variable/</guid>
       <description>
 
 &lt;h1 id=&#34;export命令&#34;&gt;export命令&lt;/h1&gt;
@@ -120,10 +120,10 @@ PATH变量=原PATH变量的值+/usr/local/texlive/2015/bin/x86_64-linux&lt;/p&gt
     
     <item>
       <title>安装ibus和插件</title>
-      <link>http://wangliang.one/blog/archives/ibus-centos/</link>
+      <link>http://blog.wangliang.one/archives/ibus-centos/</link>
       <pubDate>Mon, 02 Nov 2015 15:34:05 +0800</pubDate>
       
-      <guid>http://wangliang.one/blog/archives/ibus-centos/</guid>
+      <guid>http://blog.wangliang.one/archives/ibus-centos/</guid>
       <description>
 
 &lt;p&gt;只装ibus是不够的，还要安装插件&lt;/p&gt;
