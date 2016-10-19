@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Linux系统的kernel管理 - Pacblog</title>
+  <title>Linux 系统的 kernel 管理 与 virtualbox 相关的问题 - Pacblog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
   
-  <meta name="description" content="什么是 kernel 准确地说，Linux 只是各发行版的核心(kernel)，而不是一个完整的操作系统。 核心的作用是操作硬件。 那么核心或者说 kernel 究竟是什么呢">
+  <meta name="description" content="什么是 kernel 准确地说，Linux 只是各发行版的核心 (kernel)，而不是一个完整的操作系统。 核心的作用是操作硬件。 那么核心或者说 kernel 究竟是什么呢">
   <meta name="author" content="王亮">
-  <meta itemprop="name" content="Linux系统的kernel管理 - Pacblog">
-  <meta itemprop="description" content="什么是 kernel 准确地说，Linux 只是各发行版的核心(kernel)，而不是一个完整的操作系统。 核心的作用是操作硬件。 那么核心或者说 kernel 究竟是什么呢">
+  <meta itemprop="name" content="Linux 系统的 kernel 管理 与 virtualbox 相关的问题 - Pacblog">
+  <meta itemprop="description" content="什么是 kernel 准确地说，Linux 只是各发行版的核心 (kernel)，而不是一个完整的操作系统。 核心的作用是操作硬件。 那么核心或者说 kernel 究竟是什么呢">
   <meta itemprop="image" content="http://blog.wangliang.one/img/author.jpg">
   
   
@@ -61,7 +61,7 @@
 	<article itemprop="articleBody">
     <header class="article-info clearfix">
   <h1 itemprop="name">
-      <a href="http://blog.wangliang.one/archives/manage-kernel/" title="Linux系统的kernel管理" itemprop="url">Linux系统的kernel管理</a>
+      <a href="http://blog.wangliang.one/archives/manage-kernel/" title="Linux 系统的 kernel 管理 与 virtualbox 相关的问题" itemprop="url">Linux 系统的 kernel 管理 与 virtualbox 相关的问题</a>
   </h1>
   <p class="article-author">By
     
@@ -84,7 +84,7 @@
 <li><a href="#删除不必要的-kernel">删除不必要的 kernel</a></li>
 <li><a href="#什么时候删除">什么时候删除</a></li>
 <li><a href="#脚本实现">脚本实现</a></li>
-<li><a href="#virtualbox的问题">Virtualbox的问题</a></li>
+<li><a href="#virtualbox-的问题">Virtualbox 的问题</a></li>
 </ul>
 </nav>
 		</div>
@@ -93,19 +93,17 @@
 
 <h1 id="什么是-kernel">什么是 kernel</h1>
 
-<p>准确地说，Linux 只是各发行版的核心(kernel)，而不是一个完整的操作系统。
+<p>准确地说，Linux 只是各发行版的核心 (kernel)，而不是一个完整的操作系统。
 核心的作用是操作硬件。
 那么核心或者说 kernel 究竟是什么呢？
 其实，就是一个文件: /boot/vmlinuz-xxx (一部机器上可能有数个核心)。</p>
 
 <h1 id="查看机器上有哪些-kernel">查看机器上有哪些 kernel</h1>
 
-<p>.. code-block:: bash</p>
-
-<pre><code>$uname -r
+<pre><code>$ uname -r
 3.10.0-229.20.1.el7.x86_64
 
-$rpm -qa | grep kernel | sort
+$ rpm -qa | grep kernel | sort
 kernel-3.10.0-229.11.1.el7.x86_64
 kernel-3.10.0-229.14.1.el7.x86_64
 kernel-3.10.0-229.20.1.el7.x86_64
@@ -119,25 +117,23 @@ kernel-tools-libs-3.10.0-229.20.1.el7.x86_64
 
 <p>第一个命令是查看机器目前使用的核心。
 第二个命令是查看有哪些核心。
-除了kernel外、kernel-devel、kernel-headers 和 kernel-tools这些是用于开发或者一些特别的程序需要。
-不同的发行版，除了kernel外，其他的命名规则各有不同。
-这里有几个 kernel 版本：3.10.0-229.11.1、3.10.0-229.14.1 和 3.10.0-229.20.1。
-目前，正在使用的是3.10.0-229.20.1。</p>
+除了 kernel 外、kernel-devel、kernel-headers 和 kernel-tools这些是用于开发或者一些特别的程序需要。
+不同的发行版，除了 kernel 外，其他的命名规则各有不同。
+这里有几个 kernel 版本： 3.10.0-229.11.1、3.10.0-229.14.1 和 3.10.0-229.20.1。
+目前，正在使用的是 3.10.0-229.20.1。</p>
 
 <h1 id="删除不必要的-kernel">删除不必要的 kernel</h1>
 
-<p>之前认为，kernel太多会影响开机速度。
-现在据更专业的人士介绍，搜索内核只在生成grub.cfg时进行，记录在了配置文件grub-mkconfig中，所以多余的内核不会影响开机速度。
+<p>之前认为，kernel 太多会影响开机速度。
+现在据更专业的人士介绍，搜索内核只在生成 grub.cfg 时进行，记录在了配置文件 grub-mkconfig 中，所以多余的内核不会影响开机速度。
 这与我的实际感受不同。
-无论怎样，用一个kernel，保留一个kernel，这确实足够了。
-另外，谨慎使用autoremove命令。有时，a依赖b。安装了a，进而b因为依赖安装上了，恰好b也是其他的东西需要的。
-有一天a被删除，b可能会被错误地删除。所以不要轻易使用autoremove。
-现在，删除最旧的kernel：3.10.0-229.11.1</p>
+无论怎样，用一个 kernel，保留一个 kernel，这确实足够了。
+另外，谨慎使用 autoremove命令。有时，a 依赖 b。安装了 a，进而 b 因为依赖安装上了，恰好b也是其他的东西需要的。
+有一天 a 被删除，b 可能会被错误地删除。所以不要轻易使用 autoremove。
+现在，删除最旧的 kernel：3.10.0-229.11.1</p>
 
-<p>.. code-block:: bash</p>
-
-<pre><code>$sudo yum remove kernel-3.10.0-229.11.1.el7.x86_64
-$sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
+<pre><code>$ sudo yum remove kernel-3.10.0-229.11.1.el7.x86_64
+$ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 </code></pre>
 
 <h1 id="什么时候删除">什么时候删除</h1>
@@ -145,24 +141,22 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 <p>Linux 系统会经常更新 kernel。
 在 kernel 更新后，有了超过两个 kernel 就可以考虑删除不必要的 kernel 了。
 那么如何知道 kernel 更新了呢？
-每次开机时会显示 kernel，发现 kernel 增多后就可以看看是不是有超过两个kernel了。
+每次开机时会显示 kernel，发现 kernel 增多后就可以看看是不是有超过两个 kernel 了。
 也可以在更新时注意命令行输出。
 另外，如果使用了 virtualbox，在 kernel 更新后，虚拟机必须重新编译核心后才能继续使用。
 这时，你就知道 kernel 肯定已经更新了。</p>
 
 <h1 id="脚本实现">脚本实现</h1>
 
-<p>我已经写好一个Perl脚本，你可以在这里下载:
+<p>我已经写好一个 Perl 脚本，你可以在这里下载:
 <a href="https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl">https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl</a> 。
-注意，如果这个脚本导致不良后果，\ <strong>我不负责</strong>\。</p>
+注意，如果这个脚本导致不良后果，<strong>我不负责</strong>。</p>
 
-<h1 id="virtualbox的问题">Virtualbox的问题</h1>
+<h1 id="virtualbox-的问题">Virtualbox 的问题</h1>
 
-<p>安装devel即可使用：</p>
+<p>按张 Virtualbox 是说要“安装 Kernel”，其实只需要安装 devel 即可使用：</p>
 
-<p>.. code-block:: bash</p>
-
-<pre><code>$sudo yum install kernel-devel
+<pre><code>$ sudo yum install kernel-devel
 </code></pre>
 
 	</div>
@@ -173,6 +167,8 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
   <span></span>
   
   <a href="http://blog.wangliang.one/tags/kernel">kernel</a>
+  
+  <a href="http://blog.wangliang.one/tags/virtualbox">virtualbox</a>
   
 </div>
 
@@ -190,7 +186,7 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 
 
   <div class="article-share" id="share">
-    <div data-url="http://blog.wangliang.one/archives/manage-kernel/" data-title="Linux系统的kernel管理" data-tsina="" class="share clearfix">
+    <div data-url="http://blog.wangliang.one/archives/manage-kernel/" data-title="Linux 系统的 kernel 管理 与 virtualbox 相关的问题" data-tsina="" class="share clearfix">
     </div>
   </div>
 </footer>
@@ -232,6 +228,8 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 			<li><a href="http://blog.wangliang.one/tags/gnu" title="gnu">gnu<sup>1</sup></a></li>
       
 			<li><a href="http://blog.wangliang.one/tags/kernel" title="kernel">kernel<sup>1</sup></a></li>
+      
+			<li><a href="http://blog.wangliang.one/tags/virtualbox" title="virtualbox">virtualbox<sup>1</sup></a></li>
       
 			<li><a href="http://blog.wangliang.one/tags/%e5%b9%b6%e8%a1%8c" title="并行">并行<sup>1</sup></a></li>
       
@@ -285,6 +283,8 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
     <a href="http://blog.wangliang.one/tags/gnu" style="font-size: 12px;">gnu</a>
     
     <a href="http://blog.wangliang.one/tags/kernel" style="font-size: 12px;">kernel</a>
+    
+    <a href="http://blog.wangliang.one/tags/virtualbox" style="font-size: 12px;">virtualbox</a>
     
     <a href="http://blog.wangliang.one/tags/%e5%b9%b6%e8%a1%8c" style="font-size: 12px;">并行</a>
     

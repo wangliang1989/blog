@@ -5,10 +5,10 @@
   <title>git常用命令 - Pacblog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
   
-  <meta name="description" content="使用git，多数时候的思路是编辑、add、commit、push。 但是有时还需要回退、rebase等。 这部分命令往往因为使用较少，而常常记不">
+  <meta name="description" content="和提交有关 添加或修改文件的修改提交到暂存区(记住：git跟踪的是修改！) $ git add &lt;fileName&gt; 删除文件的修改提交到暂存区 $ git rm &lt;fileName&gt; 提交到仓库 $ git commit -m&qu">
   <meta name="author" content="王亮">
   <meta itemprop="name" content="git常用命令 - Pacblog">
-  <meta itemprop="description" content="使用git，多数时候的思路是编辑、add、commit、push。 但是有时还需要回退、rebase等。 这部分命令往往因为使用较少，而常常记不">
+  <meta itemprop="description" content="和提交有关 添加或修改文件的修改提交到暂存区(记住：git跟踪的是修改！) $ git add &lt;fileName&gt; 删除文件的修改提交到暂存区 $ git rm &lt;fileName&gt; 提交到仓库 $ git commit -m&qu">
   <meta itemprop="image" content="http://blog.wangliang.one/img/author.jpg">
   
   
@@ -89,77 +89,73 @@
     
     
 
-<p>使用git，多数时候的思路是编辑、add、commit、push。
-但是有时还需要回退、rebase等。
-这部分命令往往因为使用较少，而常常记不清，所以进行一些总结。</p>
-
 <h1 id="和提交有关">和提交有关</h1>
 
 <p>添加或修改文件的修改提交到暂存区(记住：git跟踪的是修改！)</p>
 
-<pre><code>git add &lt;fileName&gt;
+<pre><code>$ git add &lt;fileName&gt;
 </code></pre>
 
 <p>删除文件的修改提交到暂存区</p>
 
-<pre><code>git rm &lt;fileName&gt;
+<pre><code>$ git rm &lt;fileName&gt;
 </code></pre>
 
 <p>提交到仓库</p>
 
-<pre><code>git commit -m&quot;&lt;提交理由&gt;&quot;
+<pre><code>$ git commit -m&quot;&lt;提交理由&gt;&quot;
 </code></pre>
 
 <p>将工作目录中已经跟踪的文件直接提交到仓库</p>
 
-<pre><code>git commit -a
+<pre><code>$ git commit -a
 </code></pre>
 
 <h1 id="和撤销有关">和撤销有关</h1>
 
 <p>撤销工作目录的修改</p>
 
-<pre><code>git checkout -- &lt;fileName&gt;
+<pre><code>$ git checkout -- &lt;fileName&gt;
 </code></pre>
 
 <p>撤销到暂存区的提交</p>
 
-<pre><code>git reset HEAD &lt;fileName&gt;
+<pre><code>$ git reset HEAD &lt;fileName&gt;
 </code></pre>
 
 <p>版本库回退,修改放回工作区</p>
 
-<pre><code>git reset HEAD~1
+<pre><code>$ git reset HEAD~1
 </code></pre>
 
 <p>版本库回退,修改不放回工作区</p>
 
-<pre><code>git reset --hard HEAD~1
+<pre><code>$ git reset --hard HEAD~1
 </code></pre>
 
 <p>命令撤销</p>
 
-<pre><code>git reflog
-git reset --hard &lt;commit_ID&gt;
+<pre><code>$ git reflog
+$ git reset --hard &lt;commit_ID&gt;
 </code></pre>
 
 <h1 id="和变基提交有关">和变基提交有关</h1>
 
 <p>手动变基</p>
 
-<pre><code>git rebase -i master
+<pre><code>$ git rebase -i master
 </code></pre>
 
 <p>自动变基</p>
 
-<pre><code>git rebase master
+<pre><code>$ git rebase master
 </code></pre>
 
 <h1 id="和远程库有关">和远程库有关</h1>
 
 <p>删除远程库</p>
 
-<pre><code>git push origin --delete &lt;branchName&gt;
+<pre><code>$ git push origin --delete &lt;branchName&gt;
 </code></pre>
 
 	</div>
@@ -230,6 +226,8 @@ git reset --hard &lt;commit_ID&gt;
       
 			<li><a href="http://blog.wangliang.one/tags/kernel" title="kernel">kernel<sup>1</sup></a></li>
       
+			<li><a href="http://blog.wangliang.one/tags/virtualbox" title="virtualbox">virtualbox<sup>1</sup></a></li>
+      
 			<li><a href="http://blog.wangliang.one/tags/%e5%b9%b6%e8%a1%8c" title="并行">并行<sup>1</sup></a></li>
       
 			<li><a href="http://blog.wangliang.one/tags/%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" title="环境变量">环境变量<sup>1</sup></a></li>
@@ -282,6 +280,8 @@ git reset --hard &lt;commit_ID&gt;
     <a href="http://blog.wangliang.one/tags/gnu" style="font-size: 12px;">gnu</a>
     
     <a href="http://blog.wangliang.one/tags/kernel" style="font-size: 12px;">kernel</a>
+    
+    <a href="http://blog.wangliang.one/tags/virtualbox" style="font-size: 12px;">virtualbox</a>
     
     <a href="http://blog.wangliang.one/tags/%e5%b9%b6%e8%a1%8c" style="font-size: 12px;">并行</a>
     

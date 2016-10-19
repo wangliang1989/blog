@@ -19,18 +19,38 @@
 
 &lt;p&gt;只装ibus是不够的，还要安装插件&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sourceCode bash&#34;&gt;sudo yum install ibus ibus-libpinyin
+&lt;pre&gt;&lt;code&gt;$ sudo yum install ibus ibus-libpinyin
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;设置&#34;&gt;设置&lt;/h2&gt;
 
-&lt;p&gt;在上部面板的application里找setting，再找language 然后这样设置：&lt;/p&gt;
+&lt;p&gt;在上部面板的 application 里找 setting，再找 language，然后这样设置：&lt;/p&gt;
 
-&lt;p&gt;语言：汉语中国&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;项目&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;内容&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
 
-&lt;p&gt;格式：中国汉语&lt;/p&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;语言&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;汉语中国&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;p&gt;输入源：intelligent Pinyin&lt;/p&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;格式&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;中国汉语&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;输入入源&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;intelligent Pinyin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;p&gt;重启后注意选择保留原文件夹。&lt;/p&gt;
 </description>

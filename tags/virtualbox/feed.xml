@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on Pacblog</title>
-    <link>http://blog.wangliang.one/categories/linux/</link>
-    <description>Recent content in Linux on Pacblog</description>
+    <title>Virtualbox on Pacblog</title>
+    <link>http://blog.wangliang.one/tags/virtualbox/</link>
+    <description>Recent content in Virtualbox on Pacblog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 14 Nov 2015 15:34:05 +0800</lastBuildDate>
-    <atom:link href="http://blog.wangliang.one/categories/linux/feed/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.wangliang.one/tags/virtualbox/feed/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Linux 系统的 kernel 管理 与 virtualbox 相关的问题</title>
@@ -84,77 +84,6 @@ $ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 
 &lt;pre&gt;&lt;code&gt;$ sudo yum install kernel-devel
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PATH环境变量修改总结</title>
-      <link>http://blog.wangliang.one/archives/environment-PATH-variable/</link>
-      <pubDate>Tue, 10 Nov 2015 21:33:43 +0800</pubDate>
-      
-      <guid>http://blog.wangliang.one/archives/environment-PATH-variable/</guid>
-      <description>
-
-&lt;h1 id=&#34;export-命令&#34;&gt;export 命令&lt;/h1&gt;
-
-&lt;p&gt;export 命令用于设置或显示环境变量。&lt;/p&gt;
-
-&lt;h1 id=&#34;path变量&#34;&gt;PATH变量&lt;/h1&gt;
-
-&lt;p&gt;PATH变量是环境变量中的一个，看下面的export命令理解如何增加PATH变量：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export PATH=${PATH}:/usr/local/texlive/2015/bin/x86_64-linux
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这句话是说：
-PATH变量 = 原PATH变量的值 + /usr/local/texlive/2015/bin/x86_64-linux，&lt;code&gt;:&lt;/code&gt; 是加的意思。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>安装ibus和插件</title>
-      <link>http://blog.wangliang.one/archives/ibus-centos/</link>
-      <pubDate>Mon, 02 Nov 2015 15:34:05 +0800</pubDate>
-      
-      <guid>http://blog.wangliang.one/archives/ibus-centos/</guid>
-      <description>
-
-&lt;p&gt;只装ibus是不够的，还要安装插件&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo yum install ibus ibus-libpinyin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;设置&#34;&gt;设置&lt;/h2&gt;
-
-&lt;p&gt;在上部面板的 application 里找 setting，再找 language，然后这样设置：&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;项目&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;内容&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;语言&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;汉语中国&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;格式&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;中国汉语&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;输入入源&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;intelligent Pinyin&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;重启后注意选择保留原文件夹。&lt;/p&gt;
 </description>
     </item>
     

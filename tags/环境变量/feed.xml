@@ -17,20 +17,19 @@
       <guid>http://blog.wangliang.one/archives/environment-PATH-variable/</guid>
       <description>
 
-&lt;h1 id=&#34;export命令&#34;&gt;export命令&lt;/h1&gt;
+&lt;h1 id=&#34;export-命令&#34;&gt;export 命令&lt;/h1&gt;
 
-&lt;p&gt;export命令用于设置或显示环境变量。&lt;/p&gt;
+&lt;p&gt;export 命令用于设置或显示环境变量。&lt;/p&gt;
 
 &lt;h1 id=&#34;path变量&#34;&gt;PATH变量&lt;/h1&gt;
 
 &lt;p&gt;PATH变量是环境变量中的一个，看下面的export命令理解如何增加PATH变量：&lt;/p&gt;
 
-&lt;p&gt;.. code-block:: bash&lt;/p&gt;
-
-&lt;p&gt;export PATH=${PATH}:/usr/local/texlive/2015/bin/x86_64-linux&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export PATH=${PATH}:/usr/local/texlive/2015/bin/x86_64-linux
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这句话是说：
-PATH变量=原PATH变量的值+/usr/local/texlive/2015/bin/x86_64-linux&lt;/p&gt;
+PATH变量 = 原PATH变量的值 + /usr/local/texlive/2015/bin/x86_64-linux，&lt;code&gt;:&lt;/code&gt; 是加的意思。&lt;/p&gt;
 </description>
     </item>
     

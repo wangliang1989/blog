@@ -56,83 +56,79 @@
       <guid>http://blog.wangliang.one/archives/git-commands/</guid>
       <description>
 
-&lt;p&gt;使用git，多数时候的思路是编辑、add、commit、push。
-但是有时还需要回退、rebase等。
-这部分命令往往因为使用较少，而常常记不清，所以进行一些总结。&lt;/p&gt;
-
 &lt;h1 id=&#34;和提交有关&#34;&gt;和提交有关&lt;/h1&gt;
 
 &lt;p&gt;添加或修改文件的修改提交到暂存区(记住：git跟踪的是修改！)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git add &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git add &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;删除文件的修改提交到暂存区&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git rm &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git rm &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;提交到仓库&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git commit -m&amp;quot;&amp;lt;提交理由&amp;gt;&amp;quot;
+&lt;pre&gt;&lt;code&gt;$ git commit -m&amp;quot;&amp;lt;提交理由&amp;gt;&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;将工作目录中已经跟踪的文件直接提交到仓库&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git commit -a
+&lt;pre&gt;&lt;code&gt;$ git commit -a
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;和撤销有关&#34;&gt;和撤销有关&lt;/h1&gt;
 
 &lt;p&gt;撤销工作目录的修改&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git checkout -- &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout -- &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;撤销到暂存区的提交&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reset HEAD &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git reset HEAD &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;版本库回退,修改放回工作区&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reset HEAD~1
+&lt;pre&gt;&lt;code&gt;$ git reset HEAD~1
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;版本库回退,修改不放回工作区&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reset --hard HEAD~1
+&lt;pre&gt;&lt;code&gt;$ git reset --hard HEAD~1
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;命令撤销&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reflog
-git reset --hard &amp;lt;commit_ID&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git reflog
+$ git reset --hard &amp;lt;commit_ID&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;和变基提交有关&#34;&gt;和变基提交有关&lt;/h1&gt;
 
 &lt;p&gt;手动变基&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git rebase -i master
+&lt;pre&gt;&lt;code&gt;$ git rebase -i master
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;自动变基&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git rebase master
+&lt;pre&gt;&lt;code&gt;$ git rebase master
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;和远程库有关&#34;&gt;和远程库有关&lt;/h1&gt;
 
 &lt;p&gt;删除远程库&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git push origin --delete &amp;lt;branchName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git push origin --delete &amp;lt;branchName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
     <item>
-      <title>Linux系统的kernel管理</title>
+      <title>Linux 系统的 kernel 管理 与 virtualbox 相关的问题</title>
       <link>http://blog.wangliang.one/archives/manage-kernel/</link>
       <pubDate>Sat, 14 Nov 2015 15:34:05 +0800</pubDate>
       
@@ -141,19 +137,17 @@ git reset --hard &amp;lt;commit_ID&amp;gt;
 
 &lt;h1 id=&#34;什么是-kernel&#34;&gt;什么是 kernel&lt;/h1&gt;
 
-&lt;p&gt;准确地说，Linux 只是各发行版的核心(kernel)，而不是一个完整的操作系统。
+&lt;p&gt;准确地说，Linux 只是各发行版的核心 (kernel)，而不是一个完整的操作系统。
 核心的作用是操作硬件。
 那么核心或者说 kernel 究竟是什么呢？
 其实，就是一个文件: /boot/vmlinuz-xxx (一部机器上可能有数个核心)。&lt;/p&gt;
 
 &lt;h1 id=&#34;查看机器上有哪些-kernel&#34;&gt;查看机器上有哪些 kernel&lt;/h1&gt;
 
-&lt;p&gt;.. code-block:: bash&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$uname -r
+&lt;pre&gt;&lt;code&gt;$ uname -r
 3.10.0-229.20.1.el7.x86_64
 
-$rpm -qa | grep kernel | sort
+$ rpm -qa | grep kernel | sort
 kernel-3.10.0-229.11.1.el7.x86_64
 kernel-3.10.0-229.14.1.el7.x86_64
 kernel-3.10.0-229.20.1.el7.x86_64
@@ -167,25 +161,23 @@ kernel-tools-libs-3.10.0-229.20.1.el7.x86_64
 
 &lt;p&gt;第一个命令是查看机器目前使用的核心。
 第二个命令是查看有哪些核心。
-除了kernel外、kernel-devel、kernel-headers 和 kernel-tools这些是用于开发或者一些特别的程序需要。
-不同的发行版，除了kernel外，其他的命名规则各有不同。
-这里有几个 kernel 版本：3.10.0-229.11.1、3.10.0-229.14.1 和 3.10.0-229.20.1。
-目前，正在使用的是3.10.0-229.20.1。&lt;/p&gt;
+除了 kernel 外、kernel-devel、kernel-headers 和 kernel-tools这些是用于开发或者一些特别的程序需要。
+不同的发行版，除了 kernel 外，其他的命名规则各有不同。
+这里有几个 kernel 版本： 3.10.0-229.11.1、3.10.0-229.14.1 和 3.10.0-229.20.1。
+目前，正在使用的是 3.10.0-229.20.1。&lt;/p&gt;
 
 &lt;h1 id=&#34;删除不必要的-kernel&#34;&gt;删除不必要的 kernel&lt;/h1&gt;
 
-&lt;p&gt;之前认为，kernel太多会影响开机速度。
-现在据更专业的人士介绍，搜索内核只在生成grub.cfg时进行，记录在了配置文件grub-mkconfig中，所以多余的内核不会影响开机速度。
+&lt;p&gt;之前认为，kernel 太多会影响开机速度。
+现在据更专业的人士介绍，搜索内核只在生成 grub.cfg 时进行，记录在了配置文件 grub-mkconfig 中，所以多余的内核不会影响开机速度。
 这与我的实际感受不同。
-无论怎样，用一个kernel，保留一个kernel，这确实足够了。
-另外，谨慎使用autoremove命令。有时，a依赖b。安装了a，进而b因为依赖安装上了，恰好b也是其他的东西需要的。
-有一天a被删除，b可能会被错误地删除。所以不要轻易使用autoremove。
-现在，删除最旧的kernel：3.10.0-229.11.1&lt;/p&gt;
+无论怎样，用一个 kernel，保留一个 kernel，这确实足够了。
+另外，谨慎使用 autoremove命令。有时，a 依赖 b。安装了 a，进而 b 因为依赖安装上了，恰好b也是其他的东西需要的。
+有一天 a 被删除，b 可能会被错误地删除。所以不要轻易使用 autoremove。
+现在，删除最旧的 kernel：3.10.0-229.11.1&lt;/p&gt;
 
-&lt;p&gt;.. code-block:: bash&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$sudo yum remove kernel-3.10.0-229.11.1.el7.x86_64
-$sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
+&lt;pre&gt;&lt;code&gt;$ sudo yum remove kernel-3.10.0-229.11.1.el7.x86_64
+$ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;什么时候删除&#34;&gt;什么时候删除&lt;/h1&gt;
@@ -193,24 +185,22 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 &lt;p&gt;Linux 系统会经常更新 kernel。
 在 kernel 更新后，有了超过两个 kernel 就可以考虑删除不必要的 kernel 了。
 那么如何知道 kernel 更新了呢？
-每次开机时会显示 kernel，发现 kernel 增多后就可以看看是不是有超过两个kernel了。
+每次开机时会显示 kernel，发现 kernel 增多后就可以看看是不是有超过两个 kernel 了。
 也可以在更新时注意命令行输出。
 另外，如果使用了 virtualbox，在 kernel 更新后，虚拟机必须重新编译核心后才能继续使用。
 这时，你就知道 kernel 肯定已经更新了。&lt;/p&gt;
 
 &lt;h1 id=&#34;脚本实现&#34;&gt;脚本实现&lt;/h1&gt;
 
-&lt;p&gt;我已经写好一个Perl脚本，你可以在这里下载:
+&lt;p&gt;我已经写好一个 Perl 脚本，你可以在这里下载:
 &lt;a href=&#34;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&#34;&gt;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&lt;/a&gt; 。
-注意，如果这个脚本导致不良后果，\ &lt;strong&gt;我不负责&lt;/strong&gt;\。&lt;/p&gt;
+注意，如果这个脚本导致不良后果，&lt;strong&gt;我不负责&lt;/strong&gt;。&lt;/p&gt;
 
-&lt;h1 id=&#34;virtualbox的问题&#34;&gt;Virtualbox的问题&lt;/h1&gt;
+&lt;h1 id=&#34;virtualbox-的问题&#34;&gt;Virtualbox 的问题&lt;/h1&gt;
 
-&lt;p&gt;安装devel即可使用：&lt;/p&gt;
+&lt;p&gt;按张 Virtualbox 是说要“安装 Kernel”，其实只需要安装 devel 即可使用：&lt;/p&gt;
 
-&lt;p&gt;.. code-block:: bash&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$sudo yum install kernel-devel
+&lt;pre&gt;&lt;code&gt;$ sudo yum install kernel-devel
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -223,20 +213,19 @@ $sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
       <guid>http://blog.wangliang.one/archives/environment-PATH-variable/</guid>
       <description>
 
-&lt;h1 id=&#34;export命令&#34;&gt;export命令&lt;/h1&gt;
+&lt;h1 id=&#34;export-命令&#34;&gt;export 命令&lt;/h1&gt;
 
-&lt;p&gt;export命令用于设置或显示环境变量。&lt;/p&gt;
+&lt;p&gt;export 命令用于设置或显示环境变量。&lt;/p&gt;
 
 &lt;h1 id=&#34;path变量&#34;&gt;PATH变量&lt;/h1&gt;
 
 &lt;p&gt;PATH变量是环境变量中的一个，看下面的export命令理解如何增加PATH变量：&lt;/p&gt;
 
-&lt;p&gt;.. code-block:: bash&lt;/p&gt;
-
-&lt;p&gt;export PATH=${PATH}:/usr/local/texlive/2015/bin/x86_64-linux&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export PATH=${PATH}:/usr/local/texlive/2015/bin/x86_64-linux
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这句话是说：
-PATH变量=原PATH变量的值+/usr/local/texlive/2015/bin/x86_64-linux&lt;/p&gt;
+PATH变量 = 原PATH变量的值 + /usr/local/texlive/2015/bin/x86_64-linux，&lt;code&gt;:&lt;/code&gt; 是加的意思。&lt;/p&gt;
 </description>
     </item>
     
@@ -250,18 +239,38 @@ PATH变量=原PATH变量的值+/usr/local/texlive/2015/bin/x86_64-linux&lt;/p&gt
 
 &lt;p&gt;只装ibus是不够的，还要安装插件&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sourceCode bash&#34;&gt;sudo yum install ibus ibus-libpinyin
+&lt;pre&gt;&lt;code&gt;$ sudo yum install ibus ibus-libpinyin
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;设置&#34;&gt;设置&lt;/h2&gt;
 
-&lt;p&gt;在上部面板的application里找setting，再找language 然后这样设置：&lt;/p&gt;
+&lt;p&gt;在上部面板的 application 里找 setting，再找 language，然后这样设置：&lt;/p&gt;
 
-&lt;p&gt;语言：汉语中国&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;项目&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;内容&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
 
-&lt;p&gt;格式：中国汉语&lt;/p&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;语言&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;汉语中国&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;p&gt;输入源：intelligent Pinyin&lt;/p&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;格式&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;中国汉语&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;输入入源&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;intelligent Pinyin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;p&gt;重启后注意选择保留原文件夹。&lt;/p&gt;
 </description>

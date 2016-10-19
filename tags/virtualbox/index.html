@@ -2,18 +2,18 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>用GNU parallel实现简单的并行 - Pacblog</title>
+  <title>Virtualbox - Pacblog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
   
-  <meta name="description" content="有一些地震学软件运行要很长时间，如果可以并行计算就会节约时间。 并行基本概念 据LUG里比较专业的Linuxer介绍，多开几个终端，不能自动的分">
+  <meta name="description" content="Virtualbox">
   <meta name="author" content="王亮">
-  <meta itemprop="name" content="用GNU parallel实现简单的并行 - Pacblog">
-  <meta itemprop="description" content="有一些地震学软件运行要很长时间，如果可以并行计算就会节约时间。 并行基本概念 据LUG里比较专业的Linuxer介绍，多开几个终端，不能自动的分">
+  <meta itemprop="name" content="Virtualbox - Pacblog">
+  <meta itemprop="description" content="Virtualbox">
   <meta itemprop="image" content="http://blog.wangliang.one/img/author.jpg">
   
   
   <meta name="twitter:description" content="">
-  
+  <link rel="alternate" href="http://blog.wangliang.one/feed.xml" title="Pacblog" type="application/rss+xml"/>
   <link rel="shortcut icon" href="http://blog.wangliang.one/img/favicon.ico"/>
   <link rel="apple-touch-icon" href="http://blog.wangliang.one/apple-touch-icon.png" />
   <link rel="apple-touch-icon-precomposed" href="http://blog.wangliang.one/apple-touch-icon.png" />
@@ -57,104 +57,21 @@
 
   </header>
   <div id="container">
-    <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody">
-    <header class="article-info clearfix">
-  <h1 itemprop="name">
-      <a href="http://blog.wangliang.one/archives/parallel/" title="用GNU parallel实现简单的并行" itemprop="url">用GNU parallel实现简单的并行</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="http://wangliang.one" title="王亮">王亮</a>
-    
-  </p>
-  <p class="article-time">
-    <time datetime="2016-01-13 12:13:19 &#43;0800 CST" itemprop="datePublished">2016年01月13日</time>
-  </p>
-</header>
+    <div id="main">
+      
+      <h2 id="2015-11">2015-11</h2>
+      
+      <section class="post" itemscope itemprop="blogPost">
+    <a href="http://blog.wangliang.one/archives/manage-kernel/" title="Linux 系统的 kernel 管理 与 virtualbox 相关的问题" itemprop="url">
+    <h1 itemprop="name">Linux 系统的 kernel 管理 与 virtualbox 相关的问题</h1>
+    <p itemprop="description">什么是 kernel 准确地说，Linux 只是各发行版的核心 (kernel)，而不是一个完整的操作系统。 核心的作用是操作硬件。 那么核心或者说 kernel 究竟是什么呢</p>
+    <time datetime="2015-11-14 15:34:05 &#43;0800 CST" itemprop="datePublished">2015年11月14日</time>
+  </a>
+</section>
 
-	<div class="article-content">
-    
-		<div class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-      <nav id="TableOfContents">
-<ul>
-<li><a href="#并行基本概念">并行基本概念</a></li>
-<li><a href="#安装和使用gnu-parallel">安装和使用GNU parallel</a></li>
-</ul>
-</nav>
-		</div>
-    
-    
-
-<p>有一些地震学软件运行要很长时间，如果可以并行计算就会节约时间。</p>
-
-<h1 id="并行基本概念">并行基本概念</h1>
-
-<p>据LUG里比较专业的Linuxer介绍，多开几个终端，不能自动的分配核。
-另外，不并行完成一个程序所用时间除以并行完成所用的时间之商与计算机核数相等是并行优化的极限。</p>
-
-<h1 id="安装和使用gnu-parallel">安装和使用GNU parallel</h1>
-
-<p>执行这个命令安装::</p>
-
-<pre><code>(wget -O - pi.dk/3 || curl pi.dk/3/) | bash
-</code></pre>
-
-<p>这么使用::</p>
-
-<pre><code>parallel  --max-procs 8 echo {} ::: &quot;1 7&quot; &quot;8 14&quot; &quot;15 21&quot; &quot;22 28&quot;
-</code></pre>
-
-<p>这个命令会让echo并行执行。8是指最多的计算机核数，&rdquo;1 7&rdquo;这些是传给echo的参数。
-我学习并行的时间不足两小时。我试验的情况是，&rdquo;1 7&rdquo;是作为一个参数传入的，而不是两个。
-所以如果你用的是perl::</p>
-
-<pre><code>parallel  --max-procs 8 'perl nll.pl' {} ::: &quot;events 2 2&quot;
-</code></pre>
-
-<p>这里，perl会认为你传入的是一个参数，内容是events空格2空格2，而不是3个。
-目前，除了改perl脚本我还不知道这如何处理。</p>
-
-	</div>
-  <footer class="article-footer clearfix">
-  
-
-<div class="article-tags">
-  <span></span>
-  
-  <a href="http://blog.wangliang.one/tags/%E5%B9%B6%E8%A1%8C">并行</a>
-  
-  <a href="http://blog.wangliang.one/tags/gnu">GNU</a>
-  
-</div>
-
-
-
-
-
-<div class="article-categories">
-  <span></span>
-  
-  <a class="article-category-link" href="http://blog.wangliang.one/categories/%E7%BC%96%E7%A8%8B">编程</a>
-  
-</div>
-
-
-
-  <div class="article-share" id="share">
-    <div data-url="http://blog.wangliang.one/archives/parallel/" data-title="用GNU parallel实现简单的并行" data-tsina="" class="share clearfix">
+      
+      
     </div>
-  </div>
-</footer>
-
-	</article>
-  
-
-
-
-</div>
-
     <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -255,6 +172,10 @@
 
 
   
+<div class="rsspart">
+  <a rel="nofollow" href="http://blog.wangliang.one/feed.xml" type="application/rss+xml" target="_blank">RSS 订阅</a>
+</div>
+
 
 </aside>
 </div>

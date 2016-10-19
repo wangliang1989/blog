@@ -17,77 +17,73 @@
       <guid>http://blog.wangliang.one/archives/git-commands/</guid>
       <description>
 
-&lt;p&gt;使用git，多数时候的思路是编辑、add、commit、push。
-但是有时还需要回退、rebase等。
-这部分命令往往因为使用较少，而常常记不清，所以进行一些总结。&lt;/p&gt;
-
 &lt;h1 id=&#34;和提交有关&#34;&gt;和提交有关&lt;/h1&gt;
 
 &lt;p&gt;添加或修改文件的修改提交到暂存区(记住：git跟踪的是修改！)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git add &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git add &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;删除文件的修改提交到暂存区&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git rm &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git rm &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;提交到仓库&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git commit -m&amp;quot;&amp;lt;提交理由&amp;gt;&amp;quot;
+&lt;pre&gt;&lt;code&gt;$ git commit -m&amp;quot;&amp;lt;提交理由&amp;gt;&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;将工作目录中已经跟踪的文件直接提交到仓库&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git commit -a
+&lt;pre&gt;&lt;code&gt;$ git commit -a
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;和撤销有关&#34;&gt;和撤销有关&lt;/h1&gt;
 
 &lt;p&gt;撤销工作目录的修改&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git checkout -- &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git checkout -- &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;撤销到暂存区的提交&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reset HEAD &amp;lt;fileName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git reset HEAD &amp;lt;fileName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;版本库回退,修改放回工作区&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reset HEAD~1
+&lt;pre&gt;&lt;code&gt;$ git reset HEAD~1
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;版本库回退,修改不放回工作区&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reset --hard HEAD~1
+&lt;pre&gt;&lt;code&gt;$ git reset --hard HEAD~1
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;命令撤销&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git reflog
-git reset --hard &amp;lt;commit_ID&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git reflog
+$ git reset --hard &amp;lt;commit_ID&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;和变基提交有关&#34;&gt;和变基提交有关&lt;/h1&gt;
 
 &lt;p&gt;手动变基&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git rebase -i master
+&lt;pre&gt;&lt;code&gt;$ git rebase -i master
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;自动变基&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git rebase master
+&lt;pre&gt;&lt;code&gt;$ git rebase master
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;和远程库有关&#34;&gt;和远程库有关&lt;/h1&gt;
 
 &lt;p&gt;删除远程库&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git push origin --delete &amp;lt;branchName&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ git push origin --delete &amp;lt;branchName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
