@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>用GNU parallel实现简单的并行 - Pacblog</title>
+  <title>简单并行方法汇总 - Pacblog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
   
-  <meta name="description" content="有一些地震学软件运行要很长时间，如果可以并行计算就会节约时间。 并行基本概念 据LUG里比较专业的Linuxer介绍，多开几个终端，不能自动的分">
+  <meta name="description" content="并行基本概念 据 LUG 里比较专业的 Linuxer 介绍，多开几个终端，不能自动的分配核。 另外，不并行完成一个程序所用时间除以并行完成所用的时间之商与计算机核数相">
   <meta name="author" content="王亮">
-  <meta itemprop="name" content="用GNU parallel实现简单的并行 - Pacblog">
-  <meta itemprop="description" content="有一些地震学软件运行要很长时间，如果可以并行计算就会节约时间。 并行基本概念 据LUG里比较专业的Linuxer介绍，多开几个终端，不能自动的分">
+  <meta itemprop="name" content="简单并行方法汇总 - Pacblog">
+  <meta itemprop="description" content="并行基本概念 据 LUG 里比较专业的 Linuxer 介绍，多开几个终端，不能自动的分配核。 另外，不并行完成一个程序所用时间除以并行完成所用的时间之商与计算机核数相">
   <meta itemprop="image" content="http://blog.wangliang.one/img/author.jpg">
   
   
@@ -61,7 +61,7 @@
 	<article itemprop="articleBody">
     <header class="article-info clearfix">
   <h1 itemprop="name">
-      <a href="http://blog.wangliang.one/archives/parallel/" title="用GNU parallel实现简单的并行" itemprop="url">用GNU parallel实现简单的并行</a>
+      <a href="http://blog.wangliang.one/archives/parallel/" title="简单并行方法汇总" itemprop="url">简单并行方法汇总</a>
   </h1>
   <p class="article-author">By
     
@@ -80,21 +80,51 @@
       <nav id="TableOfContents">
 <ul>
 <li><a href="#并行基本概念">并行基本概念</a></li>
-<li><a href="#安装和使用gnu-parallel">安装和使用GNU parallel</a></li>
+<li><a href="#xargs">xargs</a></li>
+<li><a href="#perl-模块">perl 模块</a></li>
+<li><a href="#gnu-parallel">GNU parallel</a></li>
 </ul>
 </nav>
 		</div>
     
     
 
-<p>有一些地震学软件运行要很长时间，如果可以并行计算就会节约时间。</p>
-
 <h1 id="并行基本概念">并行基本概念</h1>
 
-<p>据LUG里比较专业的Linuxer介绍，多开几个终端，不能自动的分配核。
+<p>据 LUG 里比较专业的 Linuxer 介绍，多开几个终端，不能自动的分配核。
 另外，不并行完成一个程序所用时间除以并行完成所用的时间之商与计算机核数相等是并行优化的极限。</p>
 
-<h1 id="安装和使用gnu-parallel">安装和使用GNU parallel</h1>
+<h1 id="xargs">xargs</h1>
+
+<p>xargs 不需要自己安装，这么使用：</p>
+
+<pre><code>$ cat cmd | tr '\n' '\0' | xargs -P 8 -0 -n1  bash -c
+</code></pre>
+
+<p>把需要执行的命令写到 cmd 文件里，cmd 文件内的每一行命令会被分配一个核进行计算，8 的意思是最多同时运行 8 个进程。一定要确保 cmd 文件里每一行的命令是相互独立的，因为它们的计算顺序将不得而知。</p>
+
+<h1 id="perl-模块">perl 模块</h1>
+
+<p>调用模块：</p>
+
+<pre><code>use Parallel::ForkManager;
+</code></pre>
+
+<p>这样使用：</p>
+
+<pre><code>my $pm = Parallel::ForkManager-&gt;new(8);
+grn_LOOP:
+foreach my $ cmd (@cmd) {
+    my $pid = $pm-&gt;start and next grn_LOOP;
+    system &quot;$cmd&quot;;
+    $pm-&gt;finish;
+}
+$pm-&gt;wait_all_children;
+</code></pre>
+
+<p>每一个循环分配一个进程，最多分配 8 个。</p>
+
+<h1 id="gnu-parallel">GNU parallel</h1>
 
 <p>执行这个命令安装::</p>
 
@@ -107,13 +137,13 @@
 </code></pre>
 
 <p>这个命令会让echo并行执行。8是指最多的计算机核数，&rdquo;1 7&rdquo;这些是传给echo的参数。
-我学习并行的时间不足两小时。我试验的情况是，&rdquo;1 7&rdquo;是作为一个参数传入的，而不是两个。
+我试验的情况是，&rdquo;1 7&rdquo;是作为一个参数传入的，而不是两个。
 所以如果你用的是perl::</p>
 
 <pre><code>parallel  --max-procs 8 'perl nll.pl' {} ::: &quot;events 2 2&quot;
 </code></pre>
 
-<p>这里，perl会认为你传入的是一个参数，内容是events空格2空格2，而不是3个。
+<p>这里，perl会认为你传入的是一个参数，内容是 &ldquo;events空格2空格2&rdquo; ，而不是 3 个。
 目前，除了改perl脚本我还不知道这如何处理。</p>
 
 	</div>
@@ -143,7 +173,7 @@
 
 
   <div class="article-share" id="share">
-    <div data-url="http://blog.wangliang.one/archives/parallel/" data-title="用GNU parallel实现简单的并行" data-tsina="" class="share clearfix">
+    <div data-url="http://blog.wangliang.one/archives/parallel/" data-title="简单并行方法汇总" data-tsina="" class="share clearfix">
     </div>
   </div>
 </footer>

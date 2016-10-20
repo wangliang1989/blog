@@ -10,21 +10,49 @@
     <atom:link href="http://blog.wangliang.one/tags/gnu/feed/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>用GNU parallel实现简单的并行</title>
+      <title>简单并行方法汇总</title>
       <link>http://blog.wangliang.one/archives/parallel/</link>
       <pubDate>Wed, 13 Jan 2016 12:13:19 +0800</pubDate>
       
       <guid>http://blog.wangliang.one/archives/parallel/</guid>
       <description>
 
-&lt;p&gt;有一些地震学软件运行要很长时间，如果可以并行计算就会节约时间。&lt;/p&gt;
-
 &lt;h1 id=&#34;并行基本概念&#34;&gt;并行基本概念&lt;/h1&gt;
 
-&lt;p&gt;据LUG里比较专业的Linuxer介绍，多开几个终端，不能自动的分配核。
+&lt;p&gt;据 LUG 里比较专业的 Linuxer 介绍，多开几个终端，不能自动的分配核。
 另外，不并行完成一个程序所用时间除以并行完成所用的时间之商与计算机核数相等是并行优化的极限。&lt;/p&gt;
 
-&lt;h1 id=&#34;安装和使用gnu-parallel&#34;&gt;安装和使用GNU parallel&lt;/h1&gt;
+&lt;h1 id=&#34;xargs&#34;&gt;xargs&lt;/h1&gt;
+
+&lt;p&gt;xargs 不需要自己安装，这么使用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat cmd | tr &#39;\n&#39; &#39;\0&#39; | xargs -P 8 -0 -n1  bash -c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;把需要执行的命令写到 cmd 文件里，cmd 文件内的每一行命令会被分配一个核进行计算，8 的意思是最多同时运行 8 个进程。一定要确保 cmd 文件里每一行的命令是相互独立的，因为它们的计算顺序将不得而知。&lt;/p&gt;
+
+&lt;h1 id=&#34;perl-模块&#34;&gt;perl 模块&lt;/h1&gt;
+
+&lt;p&gt;调用模块：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use Parallel::ForkManager;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样使用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;my $pm = Parallel::ForkManager-&amp;gt;new(8);
+grn_LOOP:
+foreach my $ cmd (@cmd) {
+    my $pid = $pm-&amp;gt;start and next grn_LOOP;
+    system &amp;quot;$cmd&amp;quot;;
+    $pm-&amp;gt;finish;
+}
+$pm-&amp;gt;wait_all_children;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;每一个循环分配一个进程，最多分配 8 个。&lt;/p&gt;
+
+&lt;h1 id=&#34;gnu-parallel&#34;&gt;GNU parallel&lt;/h1&gt;
 
 &lt;p&gt;执行这个命令安装::&lt;/p&gt;
 
@@ -37,13 +65,13 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这个命令会让echo并行执行。8是指最多的计算机核数，&amp;rdquo;1 7&amp;rdquo;这些是传给echo的参数。
-我学习并行的时间不足两小时。我试验的情况是，&amp;rdquo;1 7&amp;rdquo;是作为一个参数传入的，而不是两个。
+我试验的情况是，&amp;rdquo;1 7&amp;rdquo;是作为一个参数传入的，而不是两个。
 所以如果你用的是perl::&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;parallel  --max-procs 8 &#39;perl nll.pl&#39; {} ::: &amp;quot;events 2 2&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这里，perl会认为你传入的是一个参数，内容是events空格2空格2，而不是3个。
+&lt;p&gt;这里，perl会认为你传入的是一个参数，内容是 &amp;ldquo;events空格2空格2&amp;rdquo; ，而不是 3 个。
 目前，除了改perl脚本我还不知道这如何处理。&lt;/p&gt;
 </description>
     </item>
