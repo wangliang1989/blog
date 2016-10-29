@@ -80,7 +80,7 @@ $ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 
 &lt;h2 id=&#34;virtualbox-的问题&#34;&gt;Virtualbox 的问题&lt;/h2&gt;
 
-&lt;p&gt;按装 Virtualbox 说是要“安装 Kernel”，其实只需要安装 devel 即可使用：&lt;/p&gt;
+&lt;p&gt;安装 Virtualbox 说是要“安装 Kernel”，其实只需要安装 devel 即可使用：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo yum install kernel-devel
 &lt;/code&gt;&lt;/pre&gt;
