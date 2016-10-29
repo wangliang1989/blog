@@ -17,7 +17,7 @@
       <guid>http://blog.wangliang.one/archives/ibus-centos/</guid>
       <description>
 
-&lt;p&gt;只装ibus是不够的，还要安装插件&lt;/p&gt;
+&lt;h2 id=&#34;安装-ibus-和插件&#34;&gt;安装 ibus 和插件&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo yum install ibus ibus-libpinyin
 &lt;/code&gt;&lt;/pre&gt;

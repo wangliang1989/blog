@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cygwin on Pacblog</title>
+    <link>http://blog.wangliang.one/tags/cygwin/</link>
+    <description>Recent content in Cygwin on Pacblog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 21 Nov 2015 12:13:19 +0800</lastBuildDate>
+    <atom:link href="http://blog.wangliang.one/tags/cygwin/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cygwin的安装</title>
+      <link>http://blog.wangliang.one/archives/install-cygwin/</link>
+      <pubDate>Sat, 21 Nov 2015 12:13:19 +0800</pubDate>
+      
+      <guid>http://blog.wangliang.one/archives/install-cygwin/</guid>
+      <description>
+
+&lt;p&gt;本文介绍如何在 Windows 7 下安装 Cygwin。&lt;/p&gt;
+
+&lt;h2 id=&#34;何为-cygwin&#34;&gt;何为 Cygwin&lt;/h2&gt;
+
+&lt;p&gt;Cygwin 是许多自由软件的集合，最初由 Cygnus Solutions 开发，
+用于各种版本的 Microsoft Windows上 ，运行类 UNIX 系统。
+Cygwin 的主要目的是通过重新编译，
+将 POSIX 系统(例如 Linux、BSD，以及其他 Unix 系统)上的软件移植到 Windows 上。
+Cygwin 包括了一套库，该库在 Win32 系统下实现了 POSIX 系统调用的 API；
+还有一套 GNU 开发工具集(比如 GCC、GDB)，这样可以进行简单的软件开发；
+还有一些 UNIX 系统下的常见程序。&lt;/p&gt;
+
+&lt;p&gt;目前 Cygwin 由 Red Hat 等负责维护。
+Red Hat 规定，Cygwin 库必须遵守 GNU 通用公共许可证，但也可以跟符合开源定义的自由软件链接。
+否则，须向 Red Hat 购买价格不菲的许可协议，使用 Cygwin 库的专属软件才可再发布。&lt;/p&gt;
+
+&lt;p&gt;用户可以通过&lt;a href=&#34;http://cygwin.com/lists.html&#34;&gt;Cygwin Mailing Lists&lt;/a&gt; 订阅若干个Cygwin相关的邮件列表。&lt;/p&gt;
+
+&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
+
+&lt;p&gt;根据自己 CPU 的字长选择&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://cygwin.com/setup-x86_64.exe&#34;&gt;64位安装包&lt;/a&gt; 或者 &lt;a href=&#34;https://cygwin.com/setup-x86.exe&#34;&gt;32为安装包&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.wangliang.one/img/2015112101.PNG&#34; alt=&#34;&#34; /&gt;
+就和一般的软件安装相同，双击exe。但有如下几个步骤需要注意：&lt;/p&gt;
+
+&lt;p&gt;如果你是用的上面的下载链接，下载到的是在线安装包。请选择Install for Internet。运行程序稍后会下载本地安装包：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112102.PNG&#34; alt=&#34;&#34; /&gt;
+安装目录不要包含汉字。也不要是根目录：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112103.PNG&#34; alt=&#34;&#34; /&gt;
+选择本地安装包存放的位置。默认选择就好了：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112104.PNG&#34; alt=&#34;&#34; /&gt;
+选择代理。如果你不知道代理是什么，选Direct Connection：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112105.PNG&#34; alt=&#34;&#34; /&gt;
+选择下载站点。如果不知道这是什么，请和图中选择保持一致：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112106.PNG&#34; alt=&#34;&#34; /&gt;
+选择要下载的包。
+根据你的需求下载。比如要下载gawk，在文本框中输入gawk，然后确保Bin一列的复选框都选中了。
+其他如图：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112107.PNG&#34; alt=&#34;&#34; /&gt;
+这里列出将要安装的包：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112108.PNG&#34; alt=&#34;&#34; /&gt;
+在桌面和开始菜单创建链接。如果你依赖它就选中。如果你不知道什么意思，就都选中吧。
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112109.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;添加新的安装包&#34;&gt;添加新的安装包&lt;/h2&gt;
+
+&lt;p&gt;如果发现安装包缺少，可以再打开安装Cygwin的那个exe，仿照之前选包的方式添加
+或者你可以看看这个
+&lt;a href=&#34;https://github.com/transcode-open/apt-cyg&#34;&gt;https://github.com/transcode-open/apt-cyg&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Cygwin&#34;&gt;https://zh.wikipedia.org/wiki/Cygwin&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

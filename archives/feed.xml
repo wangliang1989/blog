@@ -17,12 +17,12 @@
       <guid>http://blog.wangliang.one/archives/parallel/</guid>
       <description>
 
-&lt;h1 id=&#34;并行基本概念&#34;&gt;并行基本概念&lt;/h1&gt;
+&lt;h2 id=&#34;并行基本概念&#34;&gt;并行基本概念&lt;/h2&gt;
 
 &lt;p&gt;据 LUG 里比较专业的 Linuxer 介绍，多开几个终端，不能自动的分配核。
 另外，不并行完成一个程序所用时间除以并行完成所用的时间之商与计算机核数相等是并行优化的极限。&lt;/p&gt;
 
-&lt;h1 id=&#34;xargs&#34;&gt;xargs&lt;/h1&gt;
+&lt;h2 id=&#34;xargs&#34;&gt;xargs&lt;/h2&gt;
 
 &lt;p&gt;xargs 不需要自己安装，这么使用：&lt;/p&gt;
 
@@ -31,7 +31,7 @@
 
 &lt;p&gt;把需要执行的命令写到 cmd 文件里，cmd 文件内的每一行命令会被分配一个核进行计算，8 的意思是最多同时运行 8 个进程。一定要确保 cmd 文件里每一行的命令是相互独立的，因为它们的计算顺序将不得而知。&lt;/p&gt;
 
-&lt;h1 id=&#34;perl-模块&#34;&gt;perl 模块&lt;/h1&gt;
+&lt;h2 id=&#34;perl-模块&#34;&gt;perl 模块&lt;/h2&gt;
 
 &lt;p&gt;调用模块：&lt;/p&gt;
 
@@ -52,7 +52,7 @@ $pm-&amp;gt;wait_all_children;
 
 &lt;p&gt;每一个循环分配一个进程，最多分配 8 个。&lt;/p&gt;
 
-&lt;h1 id=&#34;gnu-parallel&#34;&gt;GNU parallel&lt;/h1&gt;
+&lt;h2 id=&#34;gnu-parallel&#34;&gt;GNU parallel&lt;/h2&gt;
 
 &lt;p&gt;执行这个命令安装::&lt;/p&gt;
 
@@ -64,15 +64,15 @@ $pm-&amp;gt;wait_all_children;
 &lt;pre&gt;&lt;code&gt;parallel  --max-procs 8 echo {} ::: &amp;quot;1 7&amp;quot; &amp;quot;8 14&amp;quot; &amp;quot;15 21&amp;quot; &amp;quot;22 28&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这个命令会让echo并行执行。8是指最多的计算机核数，&amp;rdquo;1 7&amp;rdquo;这些是传给echo的参数。
-我试验的情况是，&amp;rdquo;1 7&amp;rdquo;是作为一个参数传入的，而不是两个。
+&lt;p&gt;这个命令会让 echo 并行执行。8 是指最多的计算机核数，&amp;rdquo;1 7&amp;rdquo; 这些是传给echo的参数。
+我试验的情况是，&amp;rdquo;1 7&amp;rdquo; 是作为一个参数传入的，而不是两个。
 所以如果你用的是perl::&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;parallel  --max-procs 8 &#39;perl nll.pl&#39; {} ::: &amp;quot;events 2 2&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这里，perl会认为你传入的是一个参数，内容是 &amp;ldquo;events空格2空格2&amp;rdquo; ，而不是 3 个。
-目前，除了改perl脚本我还不知道这如何处理。&lt;/p&gt;
+目前，除了改 perl 脚本我还不知道这如何处理。&lt;/p&gt;
 </description>
     </item>
     
@@ -84,7 +84,7 @@ $pm-&amp;gt;wait_all_children;
       <guid>http://blog.wangliang.one/archives/git-commands/</guid>
       <description>
 
-&lt;h1 id=&#34;和提交有关&#34;&gt;和提交有关&lt;/h1&gt;
+&lt;h2 id=&#34;和提交有关&#34;&gt;和提交有关&lt;/h2&gt;
 
 &lt;p&gt;添加或修改文件的修改提交到暂存区(记住：git跟踪的是修改！)&lt;/p&gt;
 
@@ -106,7 +106,7 @@ $pm-&amp;gt;wait_all_children;
 &lt;pre&gt;&lt;code&gt;$ git commit -a
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;和撤销有关&#34;&gt;和撤销有关&lt;/h1&gt;
+&lt;h2 id=&#34;和撤销有关&#34;&gt;和撤销有关&lt;/h2&gt;
 
 &lt;p&gt;撤销工作目录的修改&lt;/p&gt;
 
@@ -134,7 +134,7 @@ $pm-&amp;gt;wait_all_children;
 $ git reset --hard &amp;lt;commit_ID&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;和变基提交有关&#34;&gt;和变基提交有关&lt;/h1&gt;
+&lt;h2 id=&#34;和变基提交有关&#34;&gt;和变基提交有关&lt;/h2&gt;
 
 &lt;p&gt;手动变基&lt;/p&gt;
 
@@ -146,12 +146,235 @@ $ git reset --hard &amp;lt;commit_ID&amp;gt;
 &lt;pre&gt;&lt;code&gt;$ git rebase master
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;和远程库有关&#34;&gt;和远程库有关&lt;/h1&gt;
+&lt;h2 id=&#34;和远程库有关&#34;&gt;和远程库有关&lt;/h2&gt;
 
 &lt;p&gt;删除远程库&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ git push origin --delete &amp;lt;branchName&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Cygwin的安装</title>
+      <link>http://blog.wangliang.one/archives/install-cygwin/</link>
+      <pubDate>Sat, 21 Nov 2015 12:13:19 +0800</pubDate>
+      
+      <guid>http://blog.wangliang.one/archives/install-cygwin/</guid>
+      <description>
+
+&lt;p&gt;本文介绍如何在 Windows 7 下安装 Cygwin。&lt;/p&gt;
+
+&lt;h2 id=&#34;何为-cygwin&#34;&gt;何为 Cygwin&lt;/h2&gt;
+
+&lt;p&gt;Cygwin 是许多自由软件的集合，最初由 Cygnus Solutions 开发，
+用于各种版本的 Microsoft Windows上 ，运行类 UNIX 系统。
+Cygwin 的主要目的是通过重新编译，
+将 POSIX 系统(例如 Linux、BSD，以及其他 Unix 系统)上的软件移植到 Windows 上。
+Cygwin 包括了一套库，该库在 Win32 系统下实现了 POSIX 系统调用的 API；
+还有一套 GNU 开发工具集(比如 GCC、GDB)，这样可以进行简单的软件开发；
+还有一些 UNIX 系统下的常见程序。&lt;/p&gt;
+
+&lt;p&gt;目前 Cygwin 由 Red Hat 等负责维护。
+Red Hat 规定，Cygwin 库必须遵守 GNU 通用公共许可证，但也可以跟符合开源定义的自由软件链接。
+否则，须向 Red Hat 购买价格不菲的许可协议，使用 Cygwin 库的专属软件才可再发布。&lt;/p&gt;
+
+&lt;p&gt;用户可以通过&lt;a href=&#34;http://cygwin.com/lists.html&#34;&gt;Cygwin Mailing Lists&lt;/a&gt; 订阅若干个Cygwin相关的邮件列表。&lt;/p&gt;
+
+&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
+
+&lt;p&gt;根据自己 CPU 的字长选择&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://cygwin.com/setup-x86_64.exe&#34;&gt;64位安装包&lt;/a&gt; 或者 &lt;a href=&#34;https://cygwin.com/setup-x86.exe&#34;&gt;32为安装包&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.wangliang.one/img/2015112101.PNG&#34; alt=&#34;&#34; /&gt;
+就和一般的软件安装相同，双击exe。但有如下几个步骤需要注意：&lt;/p&gt;
+
+&lt;p&gt;如果你是用的上面的下载链接，下载到的是在线安装包。请选择Install for Internet。运行程序稍后会下载本地安装包：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112102.PNG&#34; alt=&#34;&#34; /&gt;
+安装目录不要包含汉字。也不要是根目录：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112103.PNG&#34; alt=&#34;&#34; /&gt;
+选择本地安装包存放的位置。默认选择就好了：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112104.PNG&#34; alt=&#34;&#34; /&gt;
+选择代理。如果你不知道代理是什么，选Direct Connection：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112105.PNG&#34; alt=&#34;&#34; /&gt;
+选择下载站点。如果不知道这是什么，请和图中选择保持一致：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112106.PNG&#34; alt=&#34;&#34; /&gt;
+选择要下载的包。
+根据你的需求下载。比如要下载gawk，在文本框中输入gawk，然后确保Bin一列的复选框都选中了。
+其他如图：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112107.PNG&#34; alt=&#34;&#34; /&gt;
+这里列出将要安装的包：
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112108.PNG&#34; alt=&#34;&#34; /&gt;
+在桌面和开始菜单创建链接。如果你依赖它就选中。如果你不知道什么意思，就都选中吧。
+&lt;img src=&#34;http://blog.wangliang.one/img/2015112109.PNG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;添加新的安装包&#34;&gt;添加新的安装包&lt;/h2&gt;
+
+&lt;p&gt;如果发现安装包缺少，可以再打开安装Cygwin的那个exe，仿照之前选包的方式添加
+或者你可以看看这个
+&lt;a href=&#34;https://github.com/transcode-open/apt-cyg&#34;&gt;https://github.com/transcode-open/apt-cyg&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Cygwin&#34;&gt;https://zh.wikipedia.org/wiki/Cygwin&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>terminal 和 shell 的使用</title>
+      <link>http://blog.wangliang.one/archives/terminal-shell/</link>
+      <pubDate>Sat, 21 Nov 2015 12:13:19 +0800</pubDate>
+      
+      <guid>http://blog.wangliang.one/archives/terminal-shell/</guid>
+      <description>
+
+&lt;h2 id=&#34;终端模拟器-和-shell&#34;&gt;终端模拟器 和 shell&lt;/h2&gt;
+
+&lt;h3 id=&#34;终端模拟器&#34;&gt;终端模拟器&lt;/h3&gt;
+
+&lt;p&gt;终端（英语：Computer terminal），是一台电子计算机或者计算机系统，用来让用户输入数据，及显示其计算结果的机器。
+终端其实是一种输入输出设备，相对于计算机主机而言属于外设，本身并不提供运算处理功能。
+例如，食堂打饭刷卡的那个机器就是一个终端。它本身并不是一台计算机。
+但是，可以靠这个终端输入你的一卡通信息到远程计算机，然后返回信息给终端，终端会对你的一卡通余额做修改或者发出鸣音报警你没钱了。&lt;/p&gt;
+
+&lt;p&gt;早期的计算机终端一般是机电的电传打字机。
+现代的操作系统如 Linux 和 BSD 上，使用 X Window 这样的图形用户界面时，屏幕上一般有多个与不同应用相关的窗口开着，而不是只有一个与一个单个过程相连的文字流。
+这种情况下，用户一般使用终端模拟器，又叫终端模拟程序或者虚拟终端。
+这样，用户可以不必使用专门的终端装置来与计算机交换。&lt;/p&gt;
+
+&lt;h3 id=&#34;shell&#34;&gt;shell&lt;/h3&gt;
+
+&lt;p&gt;shell，中文称为壳层，是指为用户提供用户界面的软件，是操作系统内核 (core) 和用户的中介。
+普通意义上的 shell 是接受用户输入命令的程序。
+它之所以被称作 shell 是因为它隐藏了操作系统低层的细节。
+通常将 shell 分为两类：图形界面与命令行。
+图形 shell 提供一个图形用户界面（GUI），命令行shell提供一个命令行界面（CLI）。
+图形用户界面 GNOME 和KDE就是图形 shell。
+这里要介绍的是命令行 shell。&lt;/p&gt;
+
+&lt;h3 id=&#34;为什么要更改系统默认终端模拟器和-shell&#34;&gt;为什么要更改系统默认终端模拟器和 shell&lt;/h3&gt;
+
+&lt;p&gt;终端模拟器就是一个虚拟的输入输出设备，好比软键盘。shell 是操作系统的一层。
+好比刷一卡通，食堂里打饭刷卡的是一种终端，图书馆闸机是一种终端，自助借书机是一种终端等等。
+终端模拟器也有很多种。同样，shell 也是。
+GNOME 界面默认的分别是是 GNOME-terminal 和 bash。
+bash 也是绝大多数 GNU/Linux 系统和 Mac 上默认的 shell。&lt;/p&gt;
+
+&lt;p&gt;我们现在要把这二者改为 GNOME-terminator 和 zsh。
+理由是:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GNOME-terminator 可以实现分割，这是极为重要的功能&lt;/li&gt;
+&lt;li&gt;zsh 的语法几乎完全兼容于 bash&lt;/li&gt;
+&lt;li&gt;zsh 的命令补全比 bash 的更好用&lt;/li&gt;
+&lt;li&gt;zsh 配置方便&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;zsh&#34;&gt;zsh&lt;/h2&gt;
+
+&lt;h3 id=&#34;zsh-和-oh-my-zsh-的安装&#34;&gt;zsh 和 oh my zsh 的安装&lt;/h3&gt;
+
+&lt;p&gt;安装 zsh：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install zsh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh my zsh&lt;/a&gt; 是一帮人一起维护的一套 zsh 的配置文件。
+稍后我们借助它来配置 zsh。&lt;/p&gt;
+
+&lt;p&gt;安装 oh my zsh：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -L http://install.ohmyz.sh | sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这条命令，做三件事：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;下载 &lt;code&gt;oh my zsh&lt;/code&gt;  到 &lt;code&gt;~/.oh-my-zsh&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;备份已有的zsh配置文件 &lt;code&gt;~/.zshrc&lt;/code&gt; ，并复制新的 &lt;code&gt;.zshrc&lt;/code&gt; 文件&lt;/li&gt;
+&lt;li&gt;将当前用户的默认 shell 由 bash 改成 zsh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;第三步会报错： &lt;code&gt;chsh: &amp;quot;/usr/bin/zsh&amp;quot; is not listed in /etc/shells.&lt;/code&gt; ，需要手动修改默认shell，在终端执行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chsh -s /bin/zsh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;chsh 命令修改的是 login shell，当前用户重新登陆后用户的默认 shell 就从 bash 变成了 zsh。
+注意今后环境变量不要写到 &lt;code&gt;.bashrc&lt;/code&gt; 而要写到 &lt;code&gt;.zshrc&lt;/code&gt; 中。在写环境变量时，一定注意自己添加的内容写到后面去。&lt;/p&gt;
+
+&lt;h3 id=&#34;用-oh-my-zsh-配置-zsh&#34;&gt;用 oh-my-zsh 配置 zsh&lt;/h3&gt;
+
+&lt;p&gt;zsh 和 bash 一样，有专门的配置环境变量的文件： &lt;code&gt;~/.zshrc&lt;/code&gt;  。
+zsh 所有的配置都保存在其中。
+在 &lt;code&gt;.zshrc&lt;/code&gt; 中可以选择喜欢的主题，以及适当数量的插件。
+插件太多，机器会变慢&lt;/p&gt;
+
+&lt;p&gt;假设你的安装过程和上面一样，oh-my-zsh 这一套配置文件是放在当前计算机用户的主目录下的，是一个隐藏文件夹。
+在 &lt;code&gt;.zshrc&lt;/code&gt; 中有一句话来指定这个位置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export ZSH=/home/计算机用户名/.oh-my-zsh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你可以根据需要改变这个位置。&lt;/p&gt;
+
+&lt;p&gt;配置主题
+++++++++++++++&lt;/p&gt;
+
+&lt;p&gt;在\ &lt;code&gt;.zshrc&lt;/code&gt;\ 中有一句::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ZSH_THEME=&amp;quot;robbyrussell&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这句话指定主题是\ &lt;code&gt;robbyrussell&lt;/code&gt;\ 。这也是zsh的默认主题。改变这个值就可以改变主题。
+zsh的所有主题保存在\ &lt;code&gt;/themes&lt;/code&gt;\ 目录下。
+你可以看看\ &lt;code&gt;oh my zsh的themes wiki &amp;lt;https://github.com/robbyrussell/oh-my-zsh/wiki/themes&amp;gt;&lt;/code&gt;&lt;em&gt;\ 预览各个主题的效果。
+我之前用的主题是\ &lt;code&gt;amuse&lt;/code&gt;\ 。为了效果理想，你应该安装这个字体：\ &lt;code&gt;Powerline fonts &amp;lt;https://codeload.github.com/PeterPanwl/fonts/zip/master&amp;gt;&lt;/code&gt;&lt;/em&gt;\ 。
+我现在用的是\ &lt;code&gt;bullet-train&lt;/code&gt;\。这个需要单独安装。&lt;/p&gt;
+
+&lt;p&gt;配置插件
++++++++++
+有一些插件可以选用。&lt;/p&gt;
+
+&lt;p&gt;在\ &lt;code&gt;.zshrc&lt;/code&gt;\ 中有一句::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;plugins=(git)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也许这句话在你那里被注释了。这句话是说使用插件git，你可以仿照着，添加其他插件。下面介绍一些插件：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;git&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;为git的众多常用命令提供名。比如\ &lt;code&gt;git status&lt;/code&gt;\ 的别名是\ &lt;code&gt;gst&lt;/code&gt;\ ，大大减小了击键数。但该插件中\ &lt;code&gt;git mergetool --no-prompt&lt;/code&gt;\ 的别名是\ &lt;code&gt;gmt&lt;/code&gt;\ ，与 GMT 软件冲突，需要将该插件的目录 git 复制到 custom/plugins 下，然后删除其中的 gmt 别名；&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;命令补全插件: pip, pyenv；&lt;/li&gt;
+&lt;li&gt;sudo：按两下\ &lt;code&gt;ESC&lt;/code&gt;\ 即可在当前命令前加上\ &lt;code&gt;sudo&lt;/code&gt;\；&lt;/li&gt;
+&lt;li&gt;yum：为常见的yum命令提供别名。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;terminator&#34;&gt;terminator&lt;/h2&gt;
+
+&lt;p&gt;安装terminator::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install terminator
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在配置 terminator 时，注意全局里的 Appearance 的 Unfocsed terminal font brightness 的如果太小，非当前窗口将回变成黑白。
+另外可以考虑不选配置里的一般设定的显示标题栏，可以节约一点空间。&lt;/p&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E7%B5%82%E7%AB%AF&#34;&gt;https://zh.wikipedia.org/wiki/%E7%B5%82%E7%AB%AF&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Unix_shell&#34;&gt;https://zh.wikipedia.org/wiki/Unix_shell&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://seisman.info/linux-environment-for-seismology-research.html&#34;&gt;http://seisman.info/linux-environment-for-seismology-research.html&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -163,14 +386,14 @@ $ git reset --hard &amp;lt;commit_ID&amp;gt;
       <guid>http://blog.wangliang.one/archives/manage-kernel/</guid>
       <description>
 
-&lt;h1 id=&#34;什么是-kernel&#34;&gt;什么是 kernel&lt;/h1&gt;
+&lt;h2 id=&#34;什么是-kernel&#34;&gt;什么是 kernel&lt;/h2&gt;
 
 &lt;p&gt;准确地说，Linux 只是各发行版的核心 (kernel)，而不是一个完整的操作系统。
 核心的作用是操作硬件。
 那么核心或者说 kernel 究竟是什么呢？
 其实，就是一个文件: /boot/vmlinuz-xxx (一部机器上可能有数个核心)。&lt;/p&gt;
 
-&lt;h1 id=&#34;查看机器上有哪些-kernel&#34;&gt;查看机器上有哪些 kernel&lt;/h1&gt;
+&lt;h2 id=&#34;查看机器上有哪些-kernel&#34;&gt;查看机器上有哪些 kernel&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ uname -r
 3.10.0-229.20.1.el7.x86_64
@@ -194,7 +417,7 @@ kernel-tools-libs-3.10.0-229.20.1.el7.x86_64
 这里有几个 kernel 版本： 3.10.0-229.11.1、3.10.0-229.14.1 和 3.10.0-229.20.1。
 目前，正在使用的是 3.10.0-229.20.1。&lt;/p&gt;
 
-&lt;h1 id=&#34;删除不必要的-kernel&#34;&gt;删除不必要的 kernel&lt;/h1&gt;
+&lt;h2 id=&#34;删除不必要的-kernel&#34;&gt;删除不必要的 kernel&lt;/h2&gt;
 
 &lt;p&gt;之前认为，kernel 太多会影响开机速度。
 现在据更专业的人士介绍，搜索内核只在生成 grub.cfg 时进行，记录在了配置文件 grub-mkconfig 中，所以多余的内核不会影响开机速度。
@@ -208,7 +431,7 @@ kernel-tools-libs-3.10.0-229.20.1.el7.x86_64
 $ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;什么时候删除&#34;&gt;什么时候删除&lt;/h1&gt;
+&lt;h3 id=&#34;什么时候删除&#34;&gt;什么时候删除&lt;/h3&gt;
 
 &lt;p&gt;Linux 系统会经常更新 kernel。
 在 kernel 更新后，有了超过两个 kernel 就可以考虑删除不必要的 kernel 了。
@@ -218,15 +441,15 @@ $ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 另外，如果使用了 virtualbox，在 kernel 更新后，虚拟机必须重新编译核心后才能继续使用。
 这时，你就知道 kernel 肯定已经更新了。&lt;/p&gt;
 
-&lt;h1 id=&#34;脚本实现&#34;&gt;脚本实现&lt;/h1&gt;
+&lt;h3 id=&#34;脚本实现&#34;&gt;脚本实现&lt;/h3&gt;
 
 &lt;p&gt;我已经写好一个 Perl 脚本，你可以在这里下载:
-&lt;a href=&#34;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&#34;&gt;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&lt;/a&gt; 。
+&lt;a href=&#34;https://github.com/wangliang1989/scripts/blob/master/manage-kernel/manage-kernel.pl&#34;&gt;https://github.com/wangliang1989/scripts/blob/master/manage-kernel/manage-kernel.pl&lt;/a&gt; 。
 注意，如果这个脚本导致不良后果，&lt;strong&gt;我不负责&lt;/strong&gt;。&lt;/p&gt;
 
-&lt;h1 id=&#34;virtualbox-的问题&#34;&gt;Virtualbox 的问题&lt;/h1&gt;
+&lt;h2 id=&#34;virtualbox-的问题&#34;&gt;Virtualbox 的问题&lt;/h2&gt;
 
-&lt;p&gt;按张 Virtualbox 是说要“安装 Kernel”，其实只需要安装 devel 即可使用：&lt;/p&gt;
+&lt;p&gt;按装 Virtualbox 说是要“安装 Kernel”，其实只需要安装 devel 即可使用：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo yum install kernel-devel
 &lt;/code&gt;&lt;/pre&gt;
@@ -241,11 +464,11 @@ $ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
       <guid>http://blog.wangliang.one/archives/environment-PATH-variable/</guid>
       <description>
 
-&lt;h1 id=&#34;export-命令&#34;&gt;export 命令&lt;/h1&gt;
+&lt;h2 id=&#34;export-命令&#34;&gt;export 命令&lt;/h2&gt;
 
 &lt;p&gt;export 命令用于设置或显示环境变量。&lt;/p&gt;
 
-&lt;h1 id=&#34;path变量&#34;&gt;PATH变量&lt;/h1&gt;
+&lt;h2 id=&#34;path变量&#34;&gt;PATH变量&lt;/h2&gt;
 
 &lt;p&gt;PATH变量是环境变量中的一个，看下面的export命令理解如何增加PATH变量：&lt;/p&gt;
 
@@ -265,7 +488,7 @@ PATH变量 = 原PATH变量的值 + /usr/local/texlive/2015/bin/x86_64-linux，&l
       <guid>http://blog.wangliang.one/archives/ibus-centos/</guid>
       <description>
 
-&lt;p&gt;只装ibus是不够的，还要安装插件&lt;/p&gt;
+&lt;h2 id=&#34;安装-ibus-和插件&#34;&gt;安装 ibus 和插件&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo yum install ibus ibus-libpinyin
 &lt;/code&gt;&lt;/pre&gt;

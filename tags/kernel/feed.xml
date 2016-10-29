@@ -17,14 +17,14 @@
       <guid>http://blog.wangliang.one/archives/manage-kernel/</guid>
       <description>
 
-&lt;h1 id=&#34;什么是-kernel&#34;&gt;什么是 kernel&lt;/h1&gt;
+&lt;h2 id=&#34;什么是-kernel&#34;&gt;什么是 kernel&lt;/h2&gt;
 
 &lt;p&gt;准确地说，Linux 只是各发行版的核心 (kernel)，而不是一个完整的操作系统。
 核心的作用是操作硬件。
 那么核心或者说 kernel 究竟是什么呢？
 其实，就是一个文件: /boot/vmlinuz-xxx (一部机器上可能有数个核心)。&lt;/p&gt;
 
-&lt;h1 id=&#34;查看机器上有哪些-kernel&#34;&gt;查看机器上有哪些 kernel&lt;/h1&gt;
+&lt;h2 id=&#34;查看机器上有哪些-kernel&#34;&gt;查看机器上有哪些 kernel&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ uname -r
 3.10.0-229.20.1.el7.x86_64
@@ -48,7 +48,7 @@ kernel-tools-libs-3.10.0-229.20.1.el7.x86_64
 这里有几个 kernel 版本： 3.10.0-229.11.1、3.10.0-229.14.1 和 3.10.0-229.20.1。
 目前，正在使用的是 3.10.0-229.20.1。&lt;/p&gt;
 
-&lt;h1 id=&#34;删除不必要的-kernel&#34;&gt;删除不必要的 kernel&lt;/h1&gt;
+&lt;h2 id=&#34;删除不必要的-kernel&#34;&gt;删除不必要的 kernel&lt;/h2&gt;
 
 &lt;p&gt;之前认为，kernel 太多会影响开机速度。
 现在据更专业的人士介绍，搜索内核只在生成 grub.cfg 时进行，记录在了配置文件 grub-mkconfig 中，所以多余的内核不会影响开机速度。
@@ -62,7 +62,7 @@ kernel-tools-libs-3.10.0-229.20.1.el7.x86_64
 $ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;什么时候删除&#34;&gt;什么时候删除&lt;/h1&gt;
+&lt;h3 id=&#34;什么时候删除&#34;&gt;什么时候删除&lt;/h3&gt;
 
 &lt;p&gt;Linux 系统会经常更新 kernel。
 在 kernel 更新后，有了超过两个 kernel 就可以考虑删除不必要的 kernel 了。
@@ -72,15 +72,15 @@ $ sudo yum remove kernel-devel-3.10.0-229.11.1.el7.x86_64
 另外，如果使用了 virtualbox，在 kernel 更新后，虚拟机必须重新编译核心后才能继续使用。
 这时，你就知道 kernel 肯定已经更新了。&lt;/p&gt;
 
-&lt;h1 id=&#34;脚本实现&#34;&gt;脚本实现&lt;/h1&gt;
+&lt;h3 id=&#34;脚本实现&#34;&gt;脚本实现&lt;/h3&gt;
 
 &lt;p&gt;我已经写好一个 Perl 脚本，你可以在这里下载:
-&lt;a href=&#34;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&#34;&gt;https://github.com/PeterPanwl/Myinfo/blob/master/content/sourcecodes/manage-kernel/manage-kernel.pl&lt;/a&gt; 。
+&lt;a href=&#34;https://github.com/wangliang1989/scripts/blob/master/manage-kernel/manage-kernel.pl&#34;&gt;https://github.com/wangliang1989/scripts/blob/master/manage-kernel/manage-kernel.pl&lt;/a&gt; 。
 注意，如果这个脚本导致不良后果，&lt;strong&gt;我不负责&lt;/strong&gt;。&lt;/p&gt;
 
-&lt;h1 id=&#34;virtualbox-的问题&#34;&gt;Virtualbox 的问题&lt;/h1&gt;
+&lt;h2 id=&#34;virtualbox-的问题&#34;&gt;Virtualbox 的问题&lt;/h2&gt;
 
-&lt;p&gt;按张 Virtualbox 是说要“安装 Kernel”，其实只需要安装 devel 即可使用：&lt;/p&gt;
+&lt;p&gt;按装 Virtualbox 说是要“安装 Kernel”，其实只需要安装 devel 即可使用：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo yum install kernel-devel
 &lt;/code&gt;&lt;/pre&gt;

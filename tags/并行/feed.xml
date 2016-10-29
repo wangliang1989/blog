@@ -17,12 +17,12 @@
       <guid>http://blog.wangliang.one/archives/parallel/</guid>
       <description>
 
-&lt;h1 id=&#34;并行基本概念&#34;&gt;并行基本概念&lt;/h1&gt;
+&lt;h2 id=&#34;并行基本概念&#34;&gt;并行基本概念&lt;/h2&gt;
 
 &lt;p&gt;据 LUG 里比较专业的 Linuxer 介绍，多开几个终端，不能自动的分配核。
 另外，不并行完成一个程序所用时间除以并行完成所用的时间之商与计算机核数相等是并行优化的极限。&lt;/p&gt;
 
-&lt;h1 id=&#34;xargs&#34;&gt;xargs&lt;/h1&gt;
+&lt;h2 id=&#34;xargs&#34;&gt;xargs&lt;/h2&gt;
 
 &lt;p&gt;xargs 不需要自己安装，这么使用：&lt;/p&gt;
 
@@ -31,7 +31,7 @@
 
 &lt;p&gt;把需要执行的命令写到 cmd 文件里，cmd 文件内的每一行命令会被分配一个核进行计算，8 的意思是最多同时运行 8 个进程。一定要确保 cmd 文件里每一行的命令是相互独立的，因为它们的计算顺序将不得而知。&lt;/p&gt;
 
-&lt;h1 id=&#34;perl-模块&#34;&gt;perl 模块&lt;/h1&gt;
+&lt;h2 id=&#34;perl-模块&#34;&gt;perl 模块&lt;/h2&gt;
 
 &lt;p&gt;调用模块：&lt;/p&gt;
 
@@ -52,7 +52,7 @@ $pm-&amp;gt;wait_all_children;
 
 &lt;p&gt;每一个循环分配一个进程，最多分配 8 个。&lt;/p&gt;
 
-&lt;h1 id=&#34;gnu-parallel&#34;&gt;GNU parallel&lt;/h1&gt;
+&lt;h2 id=&#34;gnu-parallel&#34;&gt;GNU parallel&lt;/h2&gt;
 
 &lt;p&gt;执行这个命令安装::&lt;/p&gt;
 
@@ -64,15 +64,15 @@ $pm-&amp;gt;wait_all_children;
 &lt;pre&gt;&lt;code&gt;parallel  --max-procs 8 echo {} ::: &amp;quot;1 7&amp;quot; &amp;quot;8 14&amp;quot; &amp;quot;15 21&amp;quot; &amp;quot;22 28&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这个命令会让echo并行执行。8是指最多的计算机核数，&amp;rdquo;1 7&amp;rdquo;这些是传给echo的参数。
-我试验的情况是，&amp;rdquo;1 7&amp;rdquo;是作为一个参数传入的，而不是两个。
+&lt;p&gt;这个命令会让 echo 并行执行。8 是指最多的计算机核数，&amp;rdquo;1 7&amp;rdquo; 这些是传给echo的参数。
+我试验的情况是，&amp;rdquo;1 7&amp;rdquo; 是作为一个参数传入的，而不是两个。
 所以如果你用的是perl::&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;parallel  --max-procs 8 &#39;perl nll.pl&#39; {} ::: &amp;quot;events 2 2&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这里，perl会认为你传入的是一个参数，内容是 &amp;ldquo;events空格2空格2&amp;rdquo; ，而不是 3 个。
-目前，除了改perl脚本我还不知道这如何处理。&lt;/p&gt;
+目前，除了改 perl 脚本我还不知道这如何处理。&lt;/p&gt;
 </description>
     </item>
     

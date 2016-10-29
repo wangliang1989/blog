@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shell on Pacblog</title>
+    <link>http://blog.wangliang.one/tags/shell/</link>
+    <description>Recent content in Shell on Pacblog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 21 Nov 2015 12:13:19 +0800</lastBuildDate>
+    <atom:link href="http://blog.wangliang.one/tags/shell/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>terminal 和 shell 的使用</title>
+      <link>http://blog.wangliang.one/archives/terminal-shell/</link>
+      <pubDate>Sat, 21 Nov 2015 12:13:19 +0800</pubDate>
+      
+      <guid>http://blog.wangliang.one/archives/terminal-shell/</guid>
+      <description>
+
+&lt;h2 id=&#34;终端模拟器-和-shell&#34;&gt;终端模拟器 和 shell&lt;/h2&gt;
+
+&lt;h3 id=&#34;终端模拟器&#34;&gt;终端模拟器&lt;/h3&gt;
+
+&lt;p&gt;终端（英语：Computer terminal），是一台电子计算机或者计算机系统，用来让用户输入数据，及显示其计算结果的机器。
+终端其实是一种输入输出设备，相对于计算机主机而言属于外设，本身并不提供运算处理功能。
+例如，食堂打饭刷卡的那个机器就是一个终端。它本身并不是一台计算机。
+但是，可以靠这个终端输入你的一卡通信息到远程计算机，然后返回信息给终端，终端会对你的一卡通余额做修改或者发出鸣音报警你没钱了。&lt;/p&gt;
+
+&lt;p&gt;早期的计算机终端一般是机电的电传打字机。
+现代的操作系统如 Linux 和 BSD 上，使用 X Window 这样的图形用户界面时，屏幕上一般有多个与不同应用相关的窗口开着，而不是只有一个与一个单个过程相连的文字流。
+这种情况下，用户一般使用终端模拟器，又叫终端模拟程序或者虚拟终端。
+这样，用户可以不必使用专门的终端装置来与计算机交换。&lt;/p&gt;
+
+&lt;h3 id=&#34;shell&#34;&gt;shell&lt;/h3&gt;
+
+&lt;p&gt;shell，中文称为壳层，是指为用户提供用户界面的软件，是操作系统内核 (core) 和用户的中介。
+普通意义上的 shell 是接受用户输入命令的程序。
+它之所以被称作 shell 是因为它隐藏了操作系统低层的细节。
+通常将 shell 分为两类：图形界面与命令行。
+图形 shell 提供一个图形用户界面（GUI），命令行shell提供一个命令行界面（CLI）。
+图形用户界面 GNOME 和KDE就是图形 shell。
+这里要介绍的是命令行 shell。&lt;/p&gt;
+
+&lt;h3 id=&#34;为什么要更改系统默认终端模拟器和-shell&#34;&gt;为什么要更改系统默认终端模拟器和 shell&lt;/h3&gt;
+
+&lt;p&gt;终端模拟器就是一个虚拟的输入输出设备，好比软键盘。shell 是操作系统的一层。
+好比刷一卡通，食堂里打饭刷卡的是一种终端，图书馆闸机是一种终端，自助借书机是一种终端等等。
+终端模拟器也有很多种。同样，shell 也是。
+GNOME 界面默认的分别是是 GNOME-terminal 和 bash。
+bash 也是绝大多数 GNU/Linux 系统和 Mac 上默认的 shell。&lt;/p&gt;
+
+&lt;p&gt;我们现在要把这二者改为 GNOME-terminator 和 zsh。
+理由是:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GNOME-terminator 可以实现分割，这是极为重要的功能&lt;/li&gt;
+&lt;li&gt;zsh 的语法几乎完全兼容于 bash&lt;/li&gt;
+&lt;li&gt;zsh 的命令补全比 bash 的更好用&lt;/li&gt;
+&lt;li&gt;zsh 配置方便&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;zsh&#34;&gt;zsh&lt;/h2&gt;
+
+&lt;h3 id=&#34;zsh-和-oh-my-zsh-的安装&#34;&gt;zsh 和 oh my zsh 的安装&lt;/h3&gt;
+
+&lt;p&gt;安装 zsh：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install zsh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh my zsh&lt;/a&gt; 是一帮人一起维护的一套 zsh 的配置文件。
+稍后我们借助它来配置 zsh。&lt;/p&gt;
+
+&lt;p&gt;安装 oh my zsh：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -L http://install.ohmyz.sh | sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这条命令，做三件事：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;下载 &lt;code&gt;oh my zsh&lt;/code&gt;  到 &lt;code&gt;~/.oh-my-zsh&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;备份已有的zsh配置文件 &lt;code&gt;~/.zshrc&lt;/code&gt; ，并复制新的 &lt;code&gt;.zshrc&lt;/code&gt; 文件&lt;/li&gt;
+&lt;li&gt;将当前用户的默认 shell 由 bash 改成 zsh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;第三步会报错： &lt;code&gt;chsh: &amp;quot;/usr/bin/zsh&amp;quot; is not listed in /etc/shells.&lt;/code&gt; ，需要手动修改默认shell，在终端执行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chsh -s /bin/zsh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;chsh 命令修改的是 login shell，当前用户重新登陆后用户的默认 shell 就从 bash 变成了 zsh。
+注意今后环境变量不要写到 &lt;code&gt;.bashrc&lt;/code&gt; 而要写到 &lt;code&gt;.zshrc&lt;/code&gt; 中。在写环境变量时，一定注意自己添加的内容写到后面去。&lt;/p&gt;
+
+&lt;h3 id=&#34;用-oh-my-zsh-配置-zsh&#34;&gt;用 oh-my-zsh 配置 zsh&lt;/h3&gt;
+
+&lt;p&gt;zsh 和 bash 一样，有专门的配置环境变量的文件： &lt;code&gt;~/.zshrc&lt;/code&gt;  。
+zsh 所有的配置都保存在其中。
+在 &lt;code&gt;.zshrc&lt;/code&gt; 中可以选择喜欢的主题，以及适当数量的插件。
+插件太多，机器会变慢&lt;/p&gt;
+
+&lt;p&gt;假设你的安装过程和上面一样，oh-my-zsh 这一套配置文件是放在当前计算机用户的主目录下的，是一个隐藏文件夹。
+在 &lt;code&gt;.zshrc&lt;/code&gt; 中有一句话来指定这个位置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export ZSH=/home/计算机用户名/.oh-my-zsh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你可以根据需要改变这个位置。&lt;/p&gt;
+
+&lt;p&gt;配置主题
+++++++++++++++&lt;/p&gt;
+
+&lt;p&gt;在\ &lt;code&gt;.zshrc&lt;/code&gt;\ 中有一句::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ZSH_THEME=&amp;quot;robbyrussell&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这句话指定主题是\ &lt;code&gt;robbyrussell&lt;/code&gt;\ 。这也是zsh的默认主题。改变这个值就可以改变主题。
+zsh的所有主题保存在\ &lt;code&gt;/themes&lt;/code&gt;\ 目录下。
+你可以看看\ &lt;code&gt;oh my zsh的themes wiki &amp;lt;https://github.com/robbyrussell/oh-my-zsh/wiki/themes&amp;gt;&lt;/code&gt;&lt;em&gt;\ 预览各个主题的效果。
+我之前用的主题是\ &lt;code&gt;amuse&lt;/code&gt;\ 。为了效果理想，你应该安装这个字体：\ &lt;code&gt;Powerline fonts &amp;lt;https://codeload.github.com/PeterPanwl/fonts/zip/master&amp;gt;&lt;/code&gt;&lt;/em&gt;\ 。
+我现在用的是\ &lt;code&gt;bullet-train&lt;/code&gt;\。这个需要单独安装。&lt;/p&gt;
+
+&lt;p&gt;配置插件
++++++++++
+有一些插件可以选用。&lt;/p&gt;
+
+&lt;p&gt;在\ &lt;code&gt;.zshrc&lt;/code&gt;\ 中有一句::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;plugins=(git)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也许这句话在你那里被注释了。这句话是说使用插件git，你可以仿照着，添加其他插件。下面介绍一些插件：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;git&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;为git的众多常用命令提供名。比如\ &lt;code&gt;git status&lt;/code&gt;\ 的别名是\ &lt;code&gt;gst&lt;/code&gt;\ ，大大减小了击键数。但该插件中\ &lt;code&gt;git mergetool --no-prompt&lt;/code&gt;\ 的别名是\ &lt;code&gt;gmt&lt;/code&gt;\ ，与 GMT 软件冲突，需要将该插件的目录 git 复制到 custom/plugins 下，然后删除其中的 gmt 别名；&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;命令补全插件: pip, pyenv；&lt;/li&gt;
+&lt;li&gt;sudo：按两下\ &lt;code&gt;ESC&lt;/code&gt;\ 即可在当前命令前加上\ &lt;code&gt;sudo&lt;/code&gt;\；&lt;/li&gt;
+&lt;li&gt;yum：为常见的yum命令提供别名。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;terminator&#34;&gt;terminator&lt;/h2&gt;
+
+&lt;p&gt;安装terminator::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install terminator
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在配置 terminator 时，注意全局里的 Appearance 的 Unfocsed terminal font brightness 的如果太小，非当前窗口将回变成黑白。
+另外可以考虑不选配置里的一般设定的显示标题栏，可以节约一点空间。&lt;/p&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E7%B5%82%E7%AB%AF&#34;&gt;https://zh.wikipedia.org/wiki/%E7%B5%82%E7%AB%AF&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Unix_shell&#34;&gt;https://zh.wikipedia.org/wiki/Unix_shell&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://seisman.info/linux-environment-for-seismology-research.html&#34;&gt;http://seisman.info/linux-environment-for-seismology-research.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
