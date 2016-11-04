@@ -6,8 +6,69 @@
     <description>Recent content in Linux on Pacblog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 14 Dec 2015 15:34:05 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 Jan 2016 20:49:45 +0800</lastBuildDate>
     <atom:link href="http://blog.wangliang.one/categories/linux/feed/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Centos 7 设置快捷键</title>
+      <link>http://blog.wangliang.one/archives/centos-shortkey/</link>
+      <pubDate>Thu, 14 Jan 2016 20:49:45 +0800</pubDate>
+      
+      <guid>http://blog.wangliang.one/archives/centos-shortkey/</guid>
+      <description>&lt;p&gt;点击 &lt;code&gt;应用程序-系统工具-设置-键盘-快捷键-自定义快捷键&lt;/code&gt;。
+点击 &lt;code&gt;+&lt;/code&gt; 号就增加新的快捷键。
+名称处填写这个快捷键的名字，命令填写执行这个快捷键时传给 shell 的命令。
+完成后，点确定。
+这时，还没有设置快捷键。
+&lt;strong&gt;鼠标右键单击&lt;code&gt;禁用&lt;/code&gt;&lt;/strong&gt;，输入你想要的快捷键即可。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linux 数据备份</title>
+      <link>http://blog.wangliang.one/archives/Linux-data-sync/</link>
+      <pubDate>Tue, 05 Jan 2016 15:34:05 +0800</pubDate>
+      
+      <guid>http://blog.wangliang.one/archives/Linux-data-sync/</guid>
+      <description>
+
+&lt;h2 id=&#34;为什么要做数据备份&#34;&gt;为什么要做数据备份&lt;/h2&gt;
+
+&lt;p&gt;我在 2016 年 1 月 4 日，在一个错误的地方执行了一个 perl 脚本，脚本中包含了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;foreach my $dir (&#39;gmt&#39;, &#39;loc&#39;, &#39;model&#39;, &#39;time&#39;, &#39;viewer&#39;, &#39;obs&#39;){
+    chdir &amp;quot;./$dir&amp;quot;;
+    foreach (glob &amp;quot;*.*&amp;quot;) {
+        unlink $_ if ($_ ne &#39;tibet.obs&#39;);
+    }
+    chdir &amp;quot;../&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因为没有叫 gmt 这些名称的目录，又没有使用die终止脚本，所以这个脚本删除了目录内所有文件。
+幸好，其中只有些我最不喜欢看的文献和一些临时文件，损失还算不大。
+如果这个删除命令对文件夹有效。那么我一个半月来除了写的脚本在远程有备份外，其他所有工作就灰飞烟灭了。&lt;/p&gt;
+
+&lt;h2 id=&#34;如何做数据备份&#34;&gt;如何做数据备份&lt;/h2&gt;
+
+&lt;p&gt;用 rsync。rsync 是 Linux 上很强大很流行的一个远程备份软件。
+如果没有可以用来备份的服务器，可以备份到本地的移动硬盘上：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rsync -a --delete --progress ./text /run/media/peterpan/Elements/rsync
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这句话会把当前文件夹下的 text 同步到叫 Elements 的移动硬盘下的 rsync 目录内。
+注意，这个命令会确保目标处的文件内容和源的保持完全相同。如果目标处的文件格式不支持权限，就会跳过。
+一般移动硬盘是 NFTS 格式，所以不支持 Linux 的文件权限概念，文件的可执行权限不会被保持。
+我写了三个脚本，以便自动执行：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/wangliang1989/scripts/blob/master/sync/server.pl&#34;&gt;同步指定路径到远程服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/wangliang1989/scripts/blob/master/sync/sync.pl&#34;&gt;同步指定路径到移动硬盘&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/wangliang1989/scripts/blob/master/sync/passport.pl&#34;&gt;同步主目录所有内容到移动硬盘&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>gedit 的使用</title>

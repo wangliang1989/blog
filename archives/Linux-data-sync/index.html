@@ -2,18 +2,18 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>404 Page not found - Pacblog</title>
+  <title>Linux 数据备份 - Pacblog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
   
-  <meta name="description" content="404 Page not found">
+  <meta name="description" content="为什么要做数据备份 我在 2016 年 1 月 4 日，在一个错误的地方执行了一个 perl 脚本，脚本中包含了 foreach my $dir (&#39;gmt&#39;, &#39;loc&#39;, &#39;model&#39;, &#39;time&#39;, &#39;viewer&#39;, &#39;obs&#39;){ chdir &quot;./$dir&quot;; foreach (glob &quot;*.*&quot;) { unlink $_ if ($_ ne &#39;tibet.obs&#39;); } chdir &quot;../&quot;; } 因为没有">
   <meta name="author" content="王亮">
-  <meta itemprop="name" content="404 Page not found - Pacblog">
-  <meta itemprop="description" content="404 Page not found">
+  <meta itemprop="name" content="Linux 数据备份 - Pacblog">
+  <meta itemprop="description" content="为什么要做数据备份 我在 2016 年 1 月 4 日，在一个错误的地方执行了一个 perl 脚本，脚本中包含了 foreach my $dir (&#39;gmt&#39;, &#39;loc&#39;, &#39;model&#39;, &#39;time&#39;, &#39;viewer&#39;, &#39;obs&#39;){ chdir &quot;./$dir&quot;; foreach (glob &quot;*.*&quot;) { unlink $_ if ($_ ne &#39;tibet.obs&#39;); } chdir &quot;../&quot;; } 因为没有">
   <meta itemprop="image" content="http://blog.wangliang.one/img/author.jpg">
   
   
   <meta name="twitter:description" content="">
-  <link rel="alternate" href="http://blog.wangliang.one/feed.xml" title="Pacblog" type="application/rss+xml"/>
+  
   <link rel="shortcut icon" href="http://blog.wangliang.one/img/favicon.ico"/>
   <link rel="apple-touch-icon" href="http://blog.wangliang.one/apple-touch-icon.png" />
   <link rel="apple-touch-icon-precomposed" href="http://blog.wangliang.one/apple-touch-icon.png" />
@@ -57,11 +57,114 @@
 
   </header>
   <div id="container">
-    <div id="main">
-      
-      你访问的页面不存在
-      
+    <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody">
+    <header class="article-info clearfix">
+  <h1 itemprop="name">
+      <a href="http://blog.wangliang.one/archives/Linux-data-sync/" title="Linux 数据备份" itemprop="url">Linux 数据备份</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://wangliang.one" title="王亮">王亮</a>
+    
+  </p>
+  <p class="article-time">
+    <time datetime="2016-01-05 15:34:05 &#43;0800 CST" itemprop="datePublished">2016年01月05日</time>
+  </p>
+</header>
+
+	<div class="article-content">
+    
+		<div class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#为什么要做数据备份">为什么要做数据备份</a></li>
+<li><a href="#如何做数据备份">如何做数据备份</a></li>
+</ul></li>
+</ul>
+</nav>
+		</div>
+    
+    
+
+<h2 id="为什么要做数据备份">为什么要做数据备份</h2>
+
+<p>我在 2016 年 1 月 4 日，在一个错误的地方执行了一个 perl 脚本，脚本中包含了</p>
+
+<pre><code>foreach my $dir ('gmt', 'loc', 'model', 'time', 'viewer', 'obs'){
+    chdir &quot;./$dir&quot;;
+    foreach (glob &quot;*.*&quot;) {
+        unlink $_ if ($_ ne 'tibet.obs');
+    }
+    chdir &quot;../&quot;;
+}
+</code></pre>
+
+<p>因为没有叫 gmt 这些名称的目录，又没有使用die终止脚本，所以这个脚本删除了目录内所有文件。
+幸好，其中只有些我最不喜欢看的文献和一些临时文件，损失还算不大。
+如果这个删除命令对文件夹有效。那么我一个半月来除了写的脚本在远程有备份外，其他所有工作就灰飞烟灭了。</p>
+
+<h2 id="如何做数据备份">如何做数据备份</h2>
+
+<p>用 rsync。rsync 是 Linux 上很强大很流行的一个远程备份软件。
+如果没有可以用来备份的服务器，可以备份到本地的移动硬盘上：</p>
+
+<pre><code>rsync -a --delete --progress ./text /run/media/peterpan/Elements/rsync
+</code></pre>
+
+<p>这句话会把当前文件夹下的 text 同步到叫 Elements 的移动硬盘下的 rsync 目录内。
+注意，这个命令会确保目标处的文件内容和源的保持完全相同。如果目标处的文件格式不支持权限，就会跳过。
+一般移动硬盘是 NFTS 格式，所以不支持 Linux 的文件权限概念，文件的可执行权限不会被保持。
+我写了三个脚本，以便自动执行：</p>
+
+<ol>
+<li><a href="https://github.com/wangliang1989/scripts/blob/master/sync/server.pl">同步指定路径到远程服务器</a></li>
+<li><a href="https://github.com/wangliang1989/scripts/blob/master/sync/sync.pl">同步指定路径到移动硬盘</a></li>
+<li><a href="https://github.com/wangliang1989/scripts/blob/master/sync/passport.pl">同步主目录所有内容到移动硬盘</a></li>
+</ol>
+
+	</div>
+  <footer class="article-footer clearfix">
+  
+
+<div class="article-tags">
+  <span></span>
+  
+  <a href="http://blog.wangliang.one/tags/%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD">数据备份</a>
+  
+  <a href="http://blog.wangliang.one/tags/rsync">rsync</a>
+  
+</div>
+
+
+
+
+
+<div class="article-categories">
+  <span></span>
+  
+  <a class="article-category-link" href="http://blog.wangliang.one/categories/linux">Linux</a>
+  
+</div>
+
+
+
+  <div class="article-share" id="share">
+    <div data-url="http://blog.wangliang.one/archives/Linux-data-sync/" data-title="Linux 数据备份" data-tsina="" class="share clearfix">
     </div>
+  </div>
+</footer>
+
+	</article>
+  
+
+
+
+</div>
+
     <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -198,10 +301,6 @@
 
 
   
-<div class="rsspart">
-  <a rel="nofollow" href="http://blog.wangliang.one/feed.xml" type="application/rss+xml" target="_blank">RSS 订阅</a>
-</div>
-
 
 </aside>
 </div>
